@@ -30,7 +30,7 @@ const GoTopBtn = () => {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 30 }}
             transition={{ duration: 0.3 }}
-            className="p-3 rounded-full bg-indigo-500 text-white shadow-lg hover:bg-indigo-600"
+            className="p-3 rounded-full bg-emerald-600 dark:bg-emerald-700 text-white shadow-lg hover:bg-emerald-700 dark:hover:bg-emerald-800"
           >
             <FaArrowUp />
           </motion.button>

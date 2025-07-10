@@ -2,6 +2,7 @@ import { ArrowPathIcon } from '@heroicons/react/20/solid';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { FaXmark } from "react-icons/fa6";
+import { Link } from 'react-router';
 
 export default function Announcement() {
   const [isVisible, setIsVisible] = useState(false)
@@ -51,12 +52,12 @@ export default function Announcement() {
                 </svg>
                 Discover top destinations, hidden gems, and rich culture with our Tourism Management System.
               </p>
-              <a
+              <Link
                 href="/trips"
                 className="flex-none rounded-full bg-gray-900 px-3.5 py-1 text-sm font-semibold text-white shadow-sm hover:bg-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gray-900"
               >
                 Start exploring <span aria-hidden="true">&rarr;</span>
-              </a>
+              </Link>
             </div>
 
             {/* Dismiss Button */}
@@ -75,7 +76,7 @@ export default function Announcement() {
       </AnimatePresence>
 
       {/* DEV Reset Button */}
-      <div className="mt-2 flex justify-center">
+      <div className="p-2 flex justify-center">
         <button
           onClick={resetDismiss}
           className="inline-flex items-center gap-2 rounded bg-gray-100 px-3 py-1 text-sm font-medium text-gray-700 hover:bg-gray-200"
