@@ -1,1 +1,102 @@
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+@layer base {
+  :root {
+    /* Brand Colors */
+    --color-brand: var(--color-emerald-500);
+    --color-brand-light: var(--color-emerald-300);
+    --color-brand-dark: var(--color-emerald-700);
+
+    /* Text & Background */
+    --color-text: #0d0d0d; /* hsl(0 0% 5%) */
+    --color-text-muted: #4d4d4d; /* hsl(0 0% 30%) */
+    --color-background: #f2f2f2; /* hsl(0 0% 95%) */
+    --color-bg-dark: #e6e6e6; /* hsl(0 0% 90%) */
+    --color-bg-light: #ffffff; /* hsl(0 0% 100%) */
+
+    /* UI */
+    --color-menu: #fffefe;
+    --color-input: #f4f4f5; /* zinc-100 */
+  }
+
+  .dark {
+    /* Brand Colors */
+    --color-brand: var(--color-emerald-500);
+    --color-brand-light: var(--color-emerald-300);
+    --color-brand-dark: var(--color-emerald-700);
+
+    /* Text & Background */
+    --color-text: #f2f2f2; /* hsl(0 0% 95%) */
+    --color-text-muted: #b3b3b3; /* hsl(0 0% 70%) */
+    --color-background: #0d0d0d; /* hsl(0 0% 5%) */
+    --color-bg-dark: #000000; /* hsl(0 0% 0%) */
+    --color-bg-light: #1a1a1a; /* hsl(0 0% 10%) */
+
+    /* UI */
+    --color-menu: #1d1c1f;
+    --color-input: #27272a; /* zinc-800 */
+  }
+}
+@theme {
+  /* Fonts */
+  --font-epilogue: "Epilogue", sans-serif;
+  --font-albert-sans: "Albert Sans", sans-serif;
+  --font-funnel-display: "Funnel Display", sans-serif;
+  --font-bricolage-grotesque: "Bricolage Grotesque", sans-serif;
+
+  /* Colors */
+  --color-brand: var(--color-brand);
+  --color-brand-light: var(--color-brand-light);
+  --color-brand-dark: var(--color-brand-dark);
+
+  --color-text: var(--color-text);
+  --color-text-muted: var(--color-text-muted);
+  --color-background: var(--color-background);
+  --color-bg-dark: var(--color-bg-dark);
+  --color-bg-light: var(--color-bg-light);
+
+  --color-menu: var(--color-menu);
+  --color-input: var(--color-input);
+}
+
+/* -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- */
+
+/* @layer utilities {
+  input:-webkit-autofill {
+    box-shadow: 0 0 0px 1000px var(--color-input) inset !important;
+    -webkit-text-fill-color: var(--color-text);
+  }
+} */
+/* -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- */
+
+/* ─────  Scrollbar  ───── */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background-color: var(--color-menu);
+  border: 1px solid #e5e7eb;
+}
+::-webkit-scrollbar-thumb {
+  background-color: var(--color-brand);
+  border-radius: 9999px;
+  border: 2px solid var(--color-menu);
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: var(--color-brand-light);
+}
+
+* {
+  scrollbar-width: auto;
+  scrollbar-color: var(--color-brand) var(--color-menu);
+}
+
+.dark ::-webkit-scrollbar-track {
+  background-color: var(--color-menu);
+}
+.dark ::-webkit-scrollbar-thumb {
+  background-color: var(--color-brand);
+  border: 2px solid var(--color-menu);
+}
+/* -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- */
