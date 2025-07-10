@@ -32,7 +32,7 @@ export default function UserProfile({ user }) {
 
           <div className="px-4 py-2">
             <NavLink to="/dashboard"
-              className="w-full flex items-center gap-2 rounded-lg px-3 py-2 text-lg font-semibold text-text bg-bg-light hover:bg-bg-dark"
+              className="w-full flex items-center gap-2 rounded-lg px-3 py-2 text-lg font-semibold text-text dark:bg-zinc-700 bg-bg-light hover:bg-bg-dark dark:hover:bg-zinc-800"
             >
               <LuLayoutDashboard size={22} />
               <span>Dashboard</span>
@@ -43,7 +43,7 @@ export default function UserProfile({ user }) {
 
           <div className="px-4 py-2">
             <button onClick={user?.logout}
-              className="w-full flex items-center gap-2 rounded-lg px-3 py-2 text-lg font-semibold text-text bg-bg-light hover:bg-bg-dark"
+              className="w-full flex items-center gap-2 rounded-lg px-3 py-2 text-lg font-semibold text-text dark:bg-zinc-700 bg-bg-light hover:bg-bg-dark dark:hover:bg-zinc-800"
             >
               <HiOutlineLogout size={26} />
               <span>Logout</span>
