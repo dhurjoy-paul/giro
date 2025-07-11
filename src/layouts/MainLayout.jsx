@@ -1,3 +1,4 @@
+import { Outlet } from "react-router"
 import ScrollToHashElement from "..//utils/ScrollToHashElement"
 import Footer from "../components/Footer"
 import Navbar from "../components/Navbar"
@@ -11,7 +12,7 @@ const MainLayout = () => {
       <ScrollToHashElement />
       <main className="bg-bg-dark">
         <Navbar />
-        {/* <Outlet /> */}
+        <Outlet />
         <div className="min-h-[800vh] bg-text-muted flex justify-center items-center text-text font-bold">
           banner
         </div>

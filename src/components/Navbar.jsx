@@ -120,8 +120,7 @@ export default function Navbar() {
           <DialogPanel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-[var(--color-background)] dark:bg-[var(--color-menu)] p-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10 dark:sm:ring-white/10">
             <div className="flex items-center justify-between">
               <Heading />
-              <button
-                type="button"
+              <button type="button"
                 onClick={() => setMobileMenuOpen(false)}
                 className="-m-2.5 rounded-md p-2.5 text-[var(--color-text)] dark:text-[var(--color-text)]"
               >
@@ -134,7 +133,7 @@ export default function Navbar() {
               <div className="-my-6 divide-y divide-gray-500/10 dark:divide-gray-500/20">
                 <div className="space-y-2 py-6">
                   {menuItems.map((item, i) => (
-                    <NavLink key={i} to={item.to}
+                    <NavLink key={i} to={item.to} onClick={() => setMobileMenuOpen(false)}
                       className="mx-1 flex items-center gap-5 rounded-lg px-8 py-3 text-xl font-bold text-text hover:bg-bg-light dark:text-text dark:hover:bg-bg-dark group"
                     >{item?.icon && <span className='group-hover:text-brand' aria-hidden="true">{item?.icon}</span>}
                       <span>{item?.name}</span>
