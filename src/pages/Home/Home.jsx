@@ -1,11 +1,11 @@
 import Banner from "../../components/Banner"
-import Newsletter from "../../components/Newsletter"
+import CarouselSection from "../../components/CarouselSection"
 
 const Home = () => {
   return (
     <>
-      <Banner />
-      {/* <Newsletter /> */}
+      {/* <Banner /> */}
+      <CarouselSection />
     </>
   )
 }

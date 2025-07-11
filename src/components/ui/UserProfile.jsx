@@ -5,15 +5,25 @@ import { HiOutlineLogout } from 'react-icons/hi';
 import { LuLayoutDashboard } from "react-icons/lu";
 import { NavLink } from 'react-router';
 
-export default function UserProfile({ user }) {
+export default function UserProfile({ user, isAtTop }) {
   return (
     <Popover className="relative z-50">
-      <PopoverButton className="inline-flex items-center gap-x-2 rounded-full bg-text px-[6px] py-1 font-bold text-text focus:outline-none">
-        <span className="rounded-full bg-background size-8 flex items-center justify-center font-semibold">
-          {user?.name[0]}
-        </span>
-        <div className='text-bg-dark pr-2'><FaChevronDown /></div>
-      </PopoverButton>
+      {
+        isAtTop
+          ? <PopoverButton className="inline-flex items-center gap-x-2 rounded-full bg-[#f2f2f2] px-[6px] py-1 font-bold text-[#f2f2f2] focus:outline-none">
+            <span className="rounded-full bg-[#0d0d0d] size-8 flex items-center justify-center font-semibold">
+              {user?.name[0]}
+            </span>
+            <div className='text-black pr-2'><FaChevronDown /></div>
+          </PopoverButton>
+          : <PopoverButton className="inline-flex items-center gap-x-2 rounded-full bg-text px-[6px] py-1 font-bold text-text focus:outline-none">
+            <span className="rounded-full bg-background size-8 flex items-center justify-center font-semibold">
+              {user?.name[0]}
+            </span>
+            <div className='text-bg-dark pr-2'><FaChevronDown /></div>
+          </PopoverButton>
+      }
+
 
       <Transition
         as={Fragment}

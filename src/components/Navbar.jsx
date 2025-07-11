@@ -70,9 +70,8 @@ export default function Navbar() {
         initial={{ y: 0 }}
         animate={{ y: isNavbarVisible ? 0 : '-100%' }}
         transition={{ duration: 0.3, ease: 'easeInOut' }}
-        className={`
-    fixed w-full z-40
-    ${isAtTop ? 'bg-transparent' : 'bg-menu'}
+        className={`fixed w-full z-40 transition-all duration-300 ease-in-out
+    ${isAtTop ? 'bg-transparent text-white' : 'bg-menu text-text'}
   `}
         style={{
           top: showAnnouncement && isAtTop ? `${announcementHeight}px` : '0px',
@@ -83,12 +82,12 @@ export default function Navbar() {
 
         <nav className="mx-auto max-w-7xl px-6 py-4 md:px-8 flex items-center justify-between">
           {/* Logo */}
-          <Heading />
+          <Heading isAtTop={isAtTop} />
 
           {/* Centered nav menu */}
           <div className="hidden md:flex absolute md:text-lg left-1/2 -translate-x-1/2 md:gap-x-6 lg:gap-x-12">
             {menuItems.map((menuItem, i) => (
-              <MenuItem key={i} label={menuItem.name} to={menuItem.to} />
+              <MenuItem key={i} label={menuItem.name} to={menuItem.to} isAtTop={isAtTop} />
             ))}
           </div>
 
@@ -96,7 +95,7 @@ export default function Navbar() {
           <div className="flex items-center gap-4">
             {
               user
-                ? (<UserProfile user={user} />)
+                ? (<UserProfile user={user} isAtTop={isAtTop} />)
                 : (<Button label="Login" to="/login" icon={<HiOutlineLogin size={22} />} />)
             }
 

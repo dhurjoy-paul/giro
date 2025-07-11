@@ -1,14 +1,20 @@
 import { NavLink } from "react-router"
 
-const MenuItem = ({ label, to = '#' }) => {
+const MenuItem = ({ label, to = '#', isAtTop = false }) => {
   return (
-    <NavLink to={to} className={({ isActive }) => `font-semibold transition-colors duration-300 
-    ${isActive
-        ? 'text-brand '
-        : 'text-text hover:text-brand'
-      }`}>
-      {label}
-    </NavLink>
+    <>
+      {
+        isAtTop
+          ? <NavLink to={to} className={({ isActive }) => `font-semibold transition-colors duration-300 
+    ${isActive ? 'text-brand' : 'text-white hover:text-brand'}`}>
+            {label}
+          </NavLink>
+          : <NavLink to={to} className={({ isActive }) => `font-semibold transition-colors duration-300 
+    ${isActive ? 'text-brand' : 'text-text hover:text-brand'}`}>
+            {label}
+          </NavLink>
+      }
+    </>
   )
 }
 export default MenuItem
