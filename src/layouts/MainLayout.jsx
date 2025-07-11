@@ -13,9 +13,9 @@ const MainLayout = () => {
       <main className="bg-bg-dark">
         <Navbar />
         <Outlet />
-        <div className="min-h-[800vh] bg-text-muted flex justify-center items-center text-text font-bold">
+        {/* <div className="min-h-[800vh] bg-text-muted flex justify-center items-center text-text font-bold">
           banner
-        </div>
+        </div> */}
 
         <section className="fixed bottom-4 right-0 -translate-x-1/2 z-500 flex flex-col items-center space-y-2">
           <GoTopBtn />
