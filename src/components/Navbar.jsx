@@ -1,8 +1,7 @@
 // Navbar.jsx
 import { Dialog, DialogPanel } from '@headlessui/react';
 import { useState } from 'react';
-import { FaInfoCircle } from 'react-icons/fa';
-import { FaBars, FaPaperPlane, FaXmark } from "react-icons/fa6";
+import { FaBars, FaCircleInfo, FaPaperPlane, FaXmark } from "react-icons/fa6";
 import { HiHome, HiOutlineLogin } from "react-icons/hi";
 import { RiUserCommunityFill } from "react-icons/ri";
 import { NavLink } from 'react-router';
@@ -12,10 +11,10 @@ import MenuItem from './ui/MenuItem';
 import UserProfile from './ui/UserProfile';
 
 const menuItems = [
-  { name: 'Home', to: '/', icon: <HiHome size={26} /> },
+  { name: 'Home', to: '/', icon: <HiHome size={27} /> },
   { name: 'Trips', to: '/trips', icon: <FaPaperPlane /> },
   { name: 'Community', to: '/community', icon: <RiUserCommunityFill size={26} /> },
-  { name: 'About Us', to: '/about-us', icon: <FaInfoCircle size={24} /> }
+  { name: 'About Us', to: '/about-us', icon: <FaCircleInfo size={24} /> }
 ]
 
 export default function Navbar() {
@@ -35,7 +34,7 @@ export default function Navbar() {
         <Heading />
 
         {/* Centered nav menu */}
-        <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 md:gap-x-6 lg:gap-x-12">
+        <div className="hidden md:flex absolute md:text-lg left-1/2 -translate-x-1/2 md:gap-x-6 lg:gap-x-12">
           {menuItems.map((menuItem, i) => (
             <MenuItem key={i} label={menuItem.name} to={menuItem.to} />
           ))}
