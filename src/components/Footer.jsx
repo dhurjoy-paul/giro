@@ -21,7 +21,8 @@ const socials = [
 
 const Footer = () => {
   return (
-    <footer className="bg-bg-light text-text py-12">
+    <footer className="bg-transparent text-text pb-12">
+      <div className='px-10'> <hr className='max-w-7xl mx-auto border-t border-text-muted/30 pt-16' /></div>
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}

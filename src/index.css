@@ -61,12 +61,14 @@
 
 /* -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- */
 
-/* @layer utilities {
+@layer utilities {
   input:-webkit-autofill {
-    box-shadow: 0 0 0px 1000px var(--color-input) inset !important;
-    -webkit-text-fill-color: var(--color-text);
+    box-shadow: 0 0 0 1000px var(--color-bg-light) inset !important;
+    -webkit-text-fill-color: var(--color-text) !important;
+    caret-color: var(--color-text) !important;
+    transition: background-color 5000s ease-in-out 0s;
   }
-} */
+}
 /* -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- */
 
 /* ─────  Scrollbar  ───── */
