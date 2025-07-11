@@ -1,3 +1,4 @@
+import axios from 'axios';
 import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
 import { createContext, useEffect, useState } from 'react';
 import { app } from '../firebase/firebase.config';
@@ -53,9 +54,27 @@ const AuthProvider = ({ children }) => {
   }
 
   useEffect(() => {
-    const unSubscribe = onAuthStateChanged(auth, currentUser => {
-      if (currentUser) { setUser(currentUser); setLoading(false); }
-      else { setUser(null); setLoading(false); }
+    const unSubscribe = onAuthStateChanged(auth, async currentUser => {
+      console.log('CurrentUser -->', currentUser?.displayName, currentUser?.email)
+      if (currentUser) {
+        setUser(currentUser);
+
+        // Get JWT token
+        await axios.post(
+          `${import.meta.env.VITE_API_URL}/jwt`,
+          {
+            email: currentUser?.email,
+          },
+          { withCredentials: true }
+        )
+      }
+      else {
+        setUser(currentUser)
+        await axios.get(`${import.meta.env.VITE_API_URL}/logout`, {
+          withCredentials: true,
+        })
+      }
+      setLoading(false)
     });
     return () => unSubscribe();
   }, []);
