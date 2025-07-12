@@ -39,6 +39,8 @@
   }
 }
 @theme {
+  --breakpoint-xs: 30rem;
+  --breakpoint-auth: 55rem;
   /* Fonts */
   --font-epilogue: "Epilogue", sans-serif;
   --font-albert-sans: "Albert Sans", sans-serif;
