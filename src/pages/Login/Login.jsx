@@ -1,5 +1,6 @@
 import AOS from "aos";
 import "aos/dist/aos.css";
+import axios from "axios";
 import { getAuth, sendPasswordResetEmail } from "firebase/auth";
 import { useContext, useEffect, useRef, useState } from "react";
 import { HiOutlineEye, HiOutlineEyeOff, HiOutlineKey, HiOutlineLogin, HiOutlineMail } from "react-icons/hi";
@@ -37,44 +38,63 @@ const Login = () => {
     </div>
   );
 
-  const handleLogin = e => {
+  const handleLogin = async (e) => {
     e.preventDefault();
+
     const email = e.target.email.value;
     const password = e.target.password.value;
 
-    // setSuccessMsg(false);
-    // setError(false);
-    // setErrorMsg('');
+    try {
+      // Step 1: Sign in with Firebase Auth
+      await signIn(email, password);
 
-    signIn(email, password)
-      .then((userCredential) => {
-        const signInInfo = { email, lastSignInTime: userCredential.user?.metadata?.lastSignInTime }
+      // Step 2: Request JWT token from backend
+      const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/jwt`, { email });
 
-        // saving user info on MongoDB
+      // Step 3: Save JWT token to localStorage
+      if (data?.token) {
+        localStorage.setItem("token", data.token);
+        notifySuccess("Login successful");
+        navigate(from, { replace: true });
+      } else {
+        throw new Error("JWT token not received from server");
+      }
+    } catch (err) {
+      console.error("Login error:", err);
+      notifyFailed(err.message || "Login failed", "Authentication error");
+    }
+  };
 
-        notifySuccess();
-        navigate(from);
-      })
-      .catch((error) => {
-        const errorMessage = error.message;
-        // setError(true);
-        // setErrorMsg(errorMessage);
-        notifyFailed(errorMessage);
-        console.log(error);
-      });
-  }
-
-  const handleForgotPwd = () => {
-    const email = emailRef.current.value;
+  const handleForgotPwd = async () => {
+    const email = emailRef.current?.value?.trim();
 
     if (!email) {
-      notifyFailed('', "Please enter your email address first.");
+      notifyFailed("", "Please enter your email address first.");
       return;
     }
-    sendPasswordResetEmail(auth, email)
-      .then(() => { notifySuccess("Reset link is sent to your email address.") })
-      .catch((error) => { notifyFailed(error.message, "Failed to send reset email: ") });
-  }
+
+    try {
+      await sendPasswordResetEmail(auth, email);
+
+      notifySuccess("Password reset link sent to your email.");
+    } catch (error) {
+      console.error("Reset email error:", error);
+
+      switch (error.code) {
+        case "auth/user-not-found":
+          notifyFailed("No account found with this email", "Try again");
+          break;
+        case "auth/invalid-email":
+          notifyFailed("Invalid email address format", "Check and try again");
+          break;
+        case "auth/too-many-requests":
+          notifyFailed("Too many attempts. Try again later", "Reset blocked temporarily");
+          break;
+        default:
+          notifyFailed(error.message, "Failed to send reset email");
+      }
+    }
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-transparent px-4 sm:px-6 md:px-10 lg:px-12 xl:px-16 py-8 sm:py-12">

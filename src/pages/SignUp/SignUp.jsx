@@ -1,35 +1,35 @@
 import AOS from "aos";
 import "aos/dist/aos.css";
-import { useContext, useEffect, useRef, useState } from "react";
-import { HiOutlineMail, HiOutlinePhotograph, HiOutlineUser, HiOutlineUserAdd } from "react-icons/hi";
+import axios from "axios";
+import { useContext, useEffect, useState } from "react";
+import { HiOutlineMail, HiOutlineUser, HiOutlineUserAdd } from "react-icons/hi";
 import { Link, useLocation, useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import GoogleLogin from "../../components/GoogleLogin";
 import AutoPwd from "../../components/ui/AutoPwd";
+import CloudinaryUploader from "../../components/ui/CloudinaryUploader";
 import Heading from "../../components/ui/Heading";
 import { AuthContext } from "../../contexts/AuthProvider";
+import { saveUserInDb } from "../../utils/saveUserInDb";
 import validate from "../../utils/validate";
 
 const SignUp = () => {
-  const emailRef = useRef();
-  useEffect(() => {
-    AOS.init({ duration: 1200 });
-  }, [])
-
-  const [showPassword, setShowPassword] = useState(false);
-  const { createUser, setUser } = useContext(AuthContext);
+  const { createUser, updateUserProfile } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || '/';
 
-  // state management
+  // State
+  const [photoURL, setPhotoURL] = useState(null);
   const [pwd, setPwd] = useState('');
   const [errors, setErrors] = useState([]);
-  const [successMsg, setSuccessMsg] = useState(false);
-  const [error, setError] = useState(false);
-  const [errorMsg, setErrorMsg] = useState('');
 
-  // toast notifications
+  // Initialize AOS
+  useEffect(() => {
+    AOS.init({ duration: 1200 });
+  }, []);
+
+  // Toast components
   const notifySuccess = (msg) => toast.success(<ToastSuccess msg={msg} />);
   const notifyFailed = (error, msg) => toast.error(<ToastFailed error={error} msg={msg} />);
   const ToastSuccess = ({ msg }) => (
@@ -43,14 +43,6 @@ const SignUp = () => {
       <p>{error}</p>
     </div>
   );
-  const ToastInvalid = () => (
-    <div className='font-semibold font-poppins'>
-      <div className='flex gap-3 mb-1'>
-        <span className='text-lg text-red-600 font-semibold font-bricolage-grotesque'>Registration failed</span>
-      </div>
-      <p>Email already in use</p>
-    </div>
-  );
 
   const handlePassChange = (e) => {
     const value = e.target.value;
@@ -58,69 +50,50 @@ const SignUp = () => {
     setErrors(validate(value));
   };
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
+
     const form = e.target;
-    const formData = new FormData(form);
-    const { password, ...userInfo } = Object.fromEntries(formData.entries());
-    const { name, email, photo } = userInfo;
+    const name = form.name.value;
+    const email = form.email.value;
+    const password = form.password.value;
 
-    setSuccessMsg(false);
-    setError(false);
-    setErrorMsg('');
+    try {
+      // Step 1: Create Firebase user
+      const { user } = await createUser(email, password);
 
-    if (errors.length > 0 || pwd.length === 0) { return }
+      // Step 2: Update Firebase user profile
+      await updateUserProfile(name, photoURL);
 
-    createUser(email, password)
-      .then((result) => {
-        const uid = result.user.uid;
-        const userProfile = {
-          ...userInfo, uid,
-          creationTime: result.user?.metadata?.creationTime,
-          lastSignInTime: result.user?.metadata?.lastSignInTime,
-        };
+      // Step 3: Save user to database
+      const userData = {
+        name,
+        email,
+        image: photoURL,
+        uid: user.uid
+      };
+      await saveUserInDb(userData);
 
-        // remove this if saving it on DB
-        notifySuccess("Registration successful");
-        navigate(from);
+      // Step 4: Get JWT token from backend
+      const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/jwt`, { email });
 
-        // Save user to DB
-        // fetch('https://ph-assignment-10-server-nu.vercel.app/users', {
-        //   method: 'POST',
-        //   headers: { 'content-type': 'application/json' },
-        //   body: JSON.stringify(userProfile),
-        // })
-        //   .then(res => res.json())
-        //   .then(data => {
-        //     if (data.insertedId) {
-        //       const profile = { displayName: name, photoURL: photo };
+      // Step 5: Save token to localStorage
+      if (data?.token) {
+        localStorage.setItem("token", data.token);
+        notifySuccess("Account created successfully!");
+        navigate(from, { replace: true });
+      } else {
+        throw new Error("JWT token not received");
+      }
 
-        //       updateProfile(auth.currentUser, profile)
-        //         .then(() => {
-        //           setUser({ ...auth.currentUser });
-        //           notifySuccess();
-        //           navigate(from);
-        //         })
-        //         .catch(err => {
-        //           console.error('Profile update error:', err);
-        //           notifySuccess();
-        //           navigate(from);
-        //         });
-        //     }
-        //   });
-      })
-      .catch((error) => {
-        const errorMessage = error.message;
-        setError(true);
-        setErrorMsg(errorMessage);
-
-        console.log('Email-Password Register Error:', error);
-        if (errorMessage === "Firebase: Error (auth/email-already-in-use).") {
-          notifyInvalid();
-        } else {
-          notifyFailed(errorMessage, "Registration failed");
-        }
-      });
+    } catch (err) {
+      console.error("Sign-up error:", err);
+      if (err?.response?.data?.message === "Email already in use") {
+        notifyFailed(err.message, "Email already registered");
+      } else {
+        notifyFailed(err.message || "Something went wrong", "Registration failed");
+      }
+    }
   };
 
   return (
@@ -142,26 +115,34 @@ const SignUp = () => {
           </div>
 
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold font-bricolage-grotesque text-brand mb-1 mt-8 sm:mt-12">Create an Account</h2>
-          <p className="text-text mb-6 sm:mb-8 text-base md:text-lg">
-            Join our community and explore.
-          </p>
+          <p className="text-text mb-6 sm:mb-8 text-lg md:text-xl">Join our community and explore.</p>
 
           {/* Form */}
           <form onSubmit={handleRegister} className="text-base sm:text-lg">
+
+            {/* Cloudinary Image Upload */}
+            <CloudinaryUploader
+              folder="tripUsers"
+              label="Upload Profile Picture"
+              mode="single"
+              accentColor="oklch(69.6% 0.17 162.48)"
+              bgColor="bg-white"
+              bgColorDark="dark:bg-[#1a1a1a]"
+              dragTextColor="#0d0d0d"
+              dragTextColorDark="#b3b3b3"
+              onUploadComplete={(url) => {
+                setPhotoURL(url);
+                notifySuccess('image Uploaded')
+              }}
+            />
+
             {/* Name */}
             <>
-              <label className="input gap-4 pr-5 validator w-full h-12 rounded-lg bg-bg-light">
+              <label className="input gap-4 pr-5 validator w-full h-12 rounded-lg bg-bg-light mt-4">
                 <div className="ml-3 text-[#848f95]"><HiOutlineUser size={24} /></div>
                 <input type="text" name='name' className="flex-1 bg-transparent focus:outline-none text-black dark:text-[#f4fbff]" placeholder="Enter your name ..." required />
               </label>
               <p className="validator-hint hidden text-red-500 text-sm">❌ Enter your name</p>
-            </>
-            <>
-              <label className="input gap-4 pr-5 validator w-full h-12 rounded-lg bg-bg-light mt-4">
-                <div className="ml-3 text-[#848f95]"><HiOutlinePhotograph size={24} /></div>
-                <input type="url" name='photo' className="flex-1 bg-transparent focus:outline-none text-black dark:text-[#f4fbff]" placeholder="Enter your photo URL ..." required />
-              </label>
-              <p className="validator-hint hidden text-red-500 text-sm">❌ Enter your photo URL</p>
             </>
 
             {/* Email */}
@@ -176,8 +157,10 @@ const SignUp = () => {
             {/* Password */}
             <AutoPwd onChange={handlePassChange} value={pwd} errors={errors} pwd={pwd} />
 
-            {/* Submit */}
-            <button className="w-full flex justify-center items-center gap-2 bg-brand hover:bg-brand/90 text-white rounded-xl py-3 text-base font-medium font-bricolage-grotesque">
+            {/* Submit Button */}
+            <button disabled={!photoURL}
+              className={`w-full flex justify-center items-center gap-2 rounded-xl py-3 text-base font-medium font-bricolage-grotesque ${photoURL ? "bg-brand hover:bg-brand/90 text-white" : "bg-gray-300 text-gray-600 cursor-not-allowed"
+                }`}>
               <HiOutlineUserAdd size={22} />
               SIGN UP
             </button>
@@ -204,7 +187,6 @@ const SignUp = () => {
         />
       </div>
     </div>
-
   );
 };
 
