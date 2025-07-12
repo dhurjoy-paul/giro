@@ -5,6 +5,7 @@ import { FaBars, FaCircleInfo, FaPaperPlane, FaXmark } from "react-icons/fa6";
 import { HiHome, HiOutlineLogin } from "react-icons/hi";
 import { RiUserCommunityFill } from "react-icons/ri";
 import { NavLink } from 'react-router';
+import useAuth from '../hooks/useAuth';
 import useNavbarBehavior from '../hooks/useNavbarBehavior';
 import Announcement from './ui/Announcement';
 import Button from './ui/Button';
@@ -20,6 +21,7 @@ const menuItems = [
 ]
 
 export default function Navbar() {
+  const { user, loading } = useAuth()
   const [showAnnouncement, setShowAnnouncement] = useState(false);
   const { isNavbarVisible, isAtTop } = useNavbarBehavior();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -51,13 +53,7 @@ export default function Navbar() {
     return () => window.removeEventListener('resize', updateHeight);
   }, [showAnnouncement]);
 
-  // User example
-  // const user = {
-  //   name: 'Dhurjoy',
-  //   email: 'dhurjoy@paul.com',
-  //   logout: () => alert('Logging out...')
-  // }
-  const user = false
+  if (loading) return (<h1>loading</h1>)
 
   return (
     <>

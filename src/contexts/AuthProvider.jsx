@@ -11,20 +11,6 @@ export const AuthContext = createContext(null)
 const AuthProvider = ({ children }) => {
   const auth = getAuth(app)
   const googleProvider = new GoogleAuthProvider();
-  // const notifySuccess = () => toast.success(<ToastSuccess />);
-  // const notifyFailed = (error) => toast.error(<ToastFailed error={error} />);
-  // const ToastSuccess = () => (
-  //   <span className='text-lg text-green-600 font-semibold font-poppins'>Profile updated!</span>
-  // );
-  // const ToastFailed = ({ error }) => (
-  //   <div className='font-semibold font-poppins'>
-  //     <div className='flex gap-3 mb-1'>
-  //       <span className='text-lg text-red-600 font-semibold font-poppins'>Profile didn't update!</span>
-  //     </div>
-  //     <p>{error}</p>
-  //   </div>
-  // );
-
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -55,6 +41,7 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, async currentUser => {
       console.log('CurrentUser-->', currentUser?.displayName, currentUser?.email)
+      console.log(currentUser)
       try {
         if (currentUser) {
           setUser(currentUser);
@@ -70,7 +57,6 @@ const AuthProvider = ({ children }) => {
     });
     return () => unSubscribe();
   }, []);
-
 
   const authInfo = { user, setUser, loading, setLoading, createUser, signIn, signInWithGoogle, logOut, updateUserProfile };
 

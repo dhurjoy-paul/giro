@@ -60,6 +60,18 @@
 
   --color-menu: var(--color-menu);
   --color-input: var(--color-input);
+
+  /* Animations */
+  --animate-fade-in: fade-in 0.3s ease-out;
+
+  @keyframes fade-in {
+    "0%": {
+      opacity: 0;
+    }
+    "100%": {
+      opacity: 1;
+    }
+  }
 }
 
 /* -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- */
