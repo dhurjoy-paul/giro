@@ -8,6 +8,7 @@ export default function Button({
   icon = null,
   size = 'base',
   className = '',
+  isAtTop = false
 }) {
 
   const sizeStyles = {
@@ -19,18 +20,28 @@ export default function Button({
   return (
     <div className="relative inline-block">
       <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
-        <Link to={to}
-          className={clsx(
-            'flex items-center gap-2 relative z-10 rounded-full shadow-md transition-colors focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2',
-            'bg-gray-900 text-white hover:bg-gray-800 focus-visible:outline-gray-900',
-            'dark:bg-white dark:text-gray-900 dark:hover:bg-gray-200 dark:focus-visible:outline-white',
-            sizeStyles[size],
-            className
-          )}
-        >
-          {label}
-          {icon && <span aria-hidden="true">{icon}</span>}
-        </Link>
+        {
+          isAtTop
+            ? <Link to={to}
+              className={clsx('flex items-center gap-2 relative z-10 rounded-full shadow-md transition-colors focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2',
+                'bg-white text-gray-900 hover:bg-gray-200 focus-visible:outline-white',
+                sizeStyles[size], className)}
+            >
+              {icon && <span aria-hidden="true">{icon}</span>}
+              {label}
+            </Link>
+            : <Link to={to}
+              className={clsx('flex items-center gap-2 relative z-10 rounded-full shadow-md transition-colors focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2',
+                'bg-gray-900 text-white hover:bg-gray-800 focus-visible:outline-gray-900',
+                'dark:bg-white dark:text-gray-900 dark:hover:bg-gray-200 dark:focus-visible:outline-white',
+                sizeStyles[size],
+                className
+              )}
+            >
+              {icon && <span aria-hidden="true">{icon}</span>}
+              {label}
+            </Link>
+        }
       </motion.div>
     </div>
   )

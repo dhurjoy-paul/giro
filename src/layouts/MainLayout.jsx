@@ -1,3 +1,6 @@
+import Aos from "aos"
+import 'aos/dist/aos.css'
+import { useEffect } from "react"
 import { Outlet } from "react-router"
 import ScrollToHashElement from "..//utils/ScrollToHashElement"
 import Footer from "../components/Footer"
@@ -7,7 +10,17 @@ import GoTopBtn from "../components/ui/GoTopBtn"
 import ThemeToggle from "../components/ui/ThemeToggle"
 import ThemeProvider from "../contexts/ThemeContext"
 
+
 const MainLayout = () => {
+  useEffect(() => {
+    Aos.init({
+      duration: 1000,
+      offset: 100,         // the original trigger point
+      easing: 'ease-in-out',
+      once: true,
+    });
+  }, []);
+
   return (
     <ThemeProvider>
       <ScrollToHashElement />

@@ -52,12 +52,12 @@ export default function Navbar() {
   }, [showAnnouncement]);
 
   // User example
-  const user = {
-    name: 'Dhurjoy',
-    email: 'dhurjoy@paul.com',
-    logout: () => alert('Logging out...')
-  }
-  // const user = false
+  // const user = {
+  //   name: 'Dhurjoy',
+  //   email: 'dhurjoy@paul.com',
+  //   logout: () => alert('Logging out...')
+  // }
+  const user = false
 
   return (
     <>
@@ -96,7 +96,9 @@ export default function Navbar() {
             {
               user
                 ? (<UserProfile user={user} isAtTop={isAtTop} />)
-                : (<Button label="Login" to="/login" icon={<HiOutlineLogin size={22} />} />)
+                : isAtTop
+                  ? (<Button label="Login" to="/auth/login" isAtTop={isAtTop} icon={<HiOutlineLogin size={22} />} />)
+                  : (<Button label="Login" to="/auth/login" icon={<HiOutlineLogin size={22} />} />)
             }
 
             {/* Mobile menu button */}

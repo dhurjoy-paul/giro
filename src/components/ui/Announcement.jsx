@@ -44,8 +44,7 @@ export default function Announcement({ setShowAnnouncement }) {
             </svg>
             Discover top destinations, hidden gems, and rich culture with our Tourism Management System.
           </p>
-          <Link
-            href="/trips"
+          <Link to="/community"
             className="flex-none rounded-full bg-gray-900 px-3.5 py-1 text-sm font-semibold text-white shadow-sm hover:bg-gray-700"
           >
             Start exploring <span aria-hidden="true">&rarr;</span>

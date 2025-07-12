@@ -1,6 +1,3 @@
-import AOS from "aos";
-import "aos/dist/aos.css";
-import { useEffect } from "react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Link } from "react-router";
@@ -11,10 +8,6 @@ const images = Array.from({ length: 9 }, (_, i) =>
 );
 
 const CarouselSection = () => {
-  useEffect(() => {
-    AOS.init({ duration: 1000, once: true });
-  }, []);
-
   return (
     <div className="relative">
       {/* Carousel */}
@@ -36,7 +29,7 @@ const CarouselSection = () => {
       </Carousel>
 
       {/* Dark Overlay */}
-      <div className="absolute inset-0 bg-black/60 dark:bg-black/65 z-10" />
+      <div className="absolute inset-0 bg-black/60 z-10" />
 
       {/* Center Text */}
       <div className="absolute inset-0 flex items-center justify-center z-20">
@@ -47,7 +40,7 @@ const CarouselSection = () => {
             <div className="relative rounded-full px-3 py-1 text-sm bg-zinc-900/20 text-white ring-1 ring-white/70 hover:ring-white/60">
               New feature: Tour Guides are now accepting booking requests online!
               {' '}
-              <Link to="/" className="font-semibold text-emerald-300">
+              <Link to="/learn-more" className="font-semibold text-emerald-300">
                 <span aria-hidden="true" className="absolute inset-0" />
                 Learn more <span aria-hidden="true">&rarr;</span>
               </Link>
@@ -74,13 +67,12 @@ const CarouselSection = () => {
               data-aos="fade-up"
               data-aos-delay="700"
             >
-              <Link
-                to="#"
+              <Link to="/community"
                 className="rounded-md px-3.5 py-2.5 text-sm font-semibold text-white shadow-xs bg-brand/90 hover:bg-brand/80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
               >
                 Start Your Journey
               </Link>
-              <Link to="#" className="text-sm/6 font-semibold text-white hover:text-brand">
+              <Link to="/trips" className="text-sm/6 font-semibold text-white hover:text-brand">
                 Discover Packages<span aria-hidden="true"> →</span>
               </Link>
             </div>

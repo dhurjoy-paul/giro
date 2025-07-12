@@ -22,8 +22,12 @@ const socials = [
 const Footer = () => {
   return (
     <footer className="bg-transparent text-text pb-12">
-      <div className='px-10'> <hr className='max-w-7xl mx-auto border-t border-text-muted/30 pt-16' /></div>
+      <div className='px-10'>
+        <hr className='max-w-7xl mx-auto border-t border-text-muted/30 pt-16' />
+      </div>
+
       <motion.div
+        data-aos="fade-up"
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: 'easeOut' }}
@@ -32,33 +36,33 @@ const Footer = () => {
       >
         <section className='w-full max-w-7xl px-4 md:px-8 mx-auto flex flex-col lg:gap-12 lg:flex-row lg:justify-between lg:items-start'>
 
-          {/* left */}
-          <div className='flex flex-col items-center text-center'>
+          {/* Left */}
+          <div className='flex flex-col items-center text-center' data-aos="fade-right" data-aos-delay="400">
             <Heading />
             <p className='mt-4 mb-12 text-lg lg:text-xl text-text-muted font-bricolage-grotesque'>
               <span className='font-semibold text-text'>G</span>o,
               <span className='font-semibold text-text'> I</span>nspire,
               <span className='font-semibold text-text'> R</span>oam,
               <span className='font-semibold text-text'> O</span>rbit <br />
-              <Link to='/trips' className='lg:text-lg underline underline-offset-4 hover:decoration-2'>Explore Beyond Limits</Link>
+              <Link to='/trips' className='lg:text-lg underline underline-offset-4 hover:decoration-2'>
+                Explore Beyond Limits
+              </Link>
             </p>
           </div>
 
-          {/* right */}
-          <div>
-            {/* sociaL menu */}
+          {/* Right */}
+          <div data-aos="fade-left" data-aos-delay="400">
+            {/* Socials */}
             <div className="flex justify-center gap-6 text-xl mb-4 lg:mt-3 lg:mb-5">
               {socials.map(({ icon, href }, i) => (
-                <Link key={i} target="_blank" rel="noopener noreferrer"
-                  className="hover:text-brand transition-colors duration-300"
-                  to={href}
-                >
+                <Link key={i} to={href} target="_blank" rel="noopener noreferrer"
+                  className="hover:text-brand transition-colors duration-300">
                   {icon}
                 </Link>
               ))}
             </div>
 
-            {/* footer menu */}
+            {/* Footer Menu */}
             <div className="flex flex-wrap justify-center gap-6 md:text-lg font-medium mb-12">
               {menuItems.map((menuItem, i) => (
                 <MenuItem key={i} label={menuItem.name} to={menuItem.to} />
@@ -67,14 +71,19 @@ const Footer = () => {
           </div>
         </section>
 
-        {/* copyright section */}
+        {/* Copyright */}
         <div className="items-center justify-between text-sm md:text-base px-2">
-          <p className='text-text-muted'>Copyright © {new Date().getFullYear()} - All right reserved by <span className='font-bricolage-grotesque text-text/80'>GIRO Ltd.</span></p>
-          <p className='text-text-muted/70 font-bricolage-grotesque'>Encouraging people to explore the world and grow through travel.</p>
+          <p className='text-text-muted'>
+            Copyright © {new Date().getFullYear()} - All right reserved by
+            <span className='font-bricolage-grotesque text-text/80'> GIRO Ltd.</span>
+          </p>
+          <p className='text-text-muted/70 font-bricolage-grotesque'>
+            Encouraging people to explore the world and grow through travel.
+          </p>
         </div>
       </motion.div>
     </footer>
   )
 }
 
-export default Footer
+export default Footer;
