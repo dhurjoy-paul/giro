@@ -58,8 +58,8 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
                 {/* Heading */}
                 <div className="flex justify-between items-center mb-6">
                   <Heading />
-                  <button onClick={() => setSidebarOpen(false)}>
-                    <HiX size={22} />
+                  <button onClick={() => setSidebarOpen(false)} className='cursor-pointer'>
+                    <HiX size={26} />
                   </button>
                 </div>
 

@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { HiMenu } from 'react-icons/hi';
 import { Outlet } from 'react-router';
 import LoadingHash from '../components/shared/LoadingHash';
+import Heading from '../components/ui/Heading';
 import ThemeProvider from '../contexts/ThemeContext';
 import useAuth from '../hooks/useAuth';
 import Sidebar from '../pages/dashboard/sidebar/Sidebar';
@@ -25,10 +26,13 @@ export default function DashboardLayout() {
 
           {/* Mobile Topbar */}
           <div className="lg:hidden bg-sidebar px-4 py-3 shadow-md flex justify-between items-center border-b border-border">
-            <button onClick={() => setSidebarOpen(true)} className="text-text-muted hover:text-text transition">
-              <HiMenu size={24} />
-            </button>
-            <h1 className="text-lg font-semibold text-brand">Dashboard</h1>
+            <div className=''> <Heading /></div>
+            <div className='flex items-center gap-4'>
+              <h1 className="text-[22px] font-bricolage-grotesque font-bold text-text">Dashboard</h1>
+              <button onClick={() => setSidebarOpen(true)} className="text-text-muted hover:text-text transition cursor-pointer">
+                <HiMenu size={26} />
+              </button>
+            </div>
           </div>
 
           {/* Dynamic Content */}

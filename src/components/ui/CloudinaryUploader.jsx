@@ -100,7 +100,7 @@ export default function CloudinaryUploader({
   }
 
   return (
-    <div className={`w-full ${className}`}>
+    <div className={`w-full ${className} mb-3`}>
       <h2 className="font-normal mb-2 text-text/60 text-[17px]">{label}</h2>
 
       {/* Drop Zone */}
