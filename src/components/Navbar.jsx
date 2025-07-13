@@ -7,6 +7,7 @@ import { RiUserCommunityFill } from "react-icons/ri";
 import { NavLink } from 'react-router';
 import useAuth from '../hooks/useAuth';
 import useNavbarBehavior from '../hooks/useNavbarBehavior';
+import LoadingHash from './shared/LoadingHash';
 import Announcement from './ui/Announcement';
 import Button from './ui/Button';
 import Heading from './ui/Heading';
@@ -52,8 +53,6 @@ export default function Navbar() {
     window.addEventListener('resize', updateHeight);
     return () => window.removeEventListener('resize', updateHeight);
   }, [showAnnouncement]);
-
-  if (loading) return (<h1>loading</h1>)
 
   return (
     <>

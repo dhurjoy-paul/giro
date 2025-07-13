@@ -10,6 +10,7 @@ import GoogleLogin from "../../components/GoogleLogin";
 import Heading from "../../components/ui/Heading";
 import { AuthContext } from "../../contexts/AuthProvider";
 import { app } from "../../firebase/firebase.config";
+import { saveUserInDb } from "../../utils/saveUserInDb";
 
 const Login = () => {
   useEffect(() => {
@@ -48,10 +49,14 @@ const Login = () => {
       // Step 1: Sign in with Firebase Auth
       await signIn(email, password);
 
-      // Step 2: Request JWT token from backend
-      const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/jwt`, { email });
+      // Step 2. Save user to DB (giving email to set last login)
+      await saveUserInDb({ email });
 
-      // Step 3: Save JWT token to localStorage
+      // Step 3: Request JWT token from backend
+      const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/jwt`, { email });
+      console.log(data.token, data)
+
+      // Step 4: Save JWT token to localStorage
       if (data?.token) {
         localStorage.setItem("token", data.token);
         notifySuccess("Login successful");
