@@ -16,8 +16,6 @@ const MainLayout = () => {
   const location = useLocation();
   const { loading } = useAuth();
 
-  if (loading) return <LoadingHash />;
-
   useEffect(() => {
     Aos.init({
       duration: 1000,
@@ -32,6 +30,8 @@ const MainLayout = () => {
 
     return () => clearTimeout(timeout);
   }, [location.pathname, location.hash]);
+
+  if (loading) return <LoadingHash />;
 
   return (
     <ThemeProvider>

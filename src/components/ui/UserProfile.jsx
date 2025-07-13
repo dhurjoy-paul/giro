@@ -5,9 +5,10 @@ import { HiOutlineLogout } from 'react-icons/hi';
 import { LuLayoutDashboard } from "react-icons/lu";
 import { NavLink } from 'react-router';
 import useAuth from '../../hooks/useAuth';
+import UserImage from '../shared/UserImage';
 
-const UserProfile = ({ user, isAtTop }) => {
-  const { logOut } = useAuth()
+const UserProfile = ({ isAtTop }) => {
+  const { user, logOut } = useAuth()
   const hasPhoto = !!user?.photoURL;
 
   // Get initials from displayName
@@ -26,25 +27,7 @@ const UserProfile = ({ user, isAtTop }) => {
         className={`inline-flex items-center gap-x-2 rounded-full px-[6px] py-1 font-bold focus:outline-none ${isAtTop ? 'bg-[#f2f2f2] text-[#f2f2f2]' : 'bg-text text-text'
           }`}
       >
-        <span className={avatarWrapperClass}>
-          {user ? (
-            hasPhoto ? (
-              <img
-                src={user.photoURL}
-                alt={user.displayName || 'User'}
-                className="w-full h-full object-cover rounded-full animate-fade-in"
-              />
-            ) : (
-              <span className="text-sm font-semibold">{initials}</span>
-            )
-          ) : (
-            <img
-              src="/default-avatar.png"
-              alt="Default Avatar"
-              className="size-8 object-cover rounded-full animate-fade-in"
-            />
-          )}
-        </span>
+        <UserImage isAtTop={isAtTop} />
         <div className={`${isAtTop ? 'text-black' : 'text-bg-dark'} pr-2`}>
           <FaChevronDown />
         </div>

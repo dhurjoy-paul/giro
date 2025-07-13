@@ -54,7 +54,6 @@ const Login = () => {
 
       // Step 3: Request JWT token from backend
       const { data } = await axios.post(`${import.meta.env.VITE_API_URL}/jwt`, { email });
-      console.log(data.token, data)
 
       // Step 4: Save JWT token to localStorage
       if (data?.token) {

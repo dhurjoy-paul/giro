@@ -8,7 +8,6 @@ const PrivateRoute = ({ children }) => {
   const token = localStorage.getItem("token");
 
   if (loading) {
-    console.log('[PrivateRoute] 🔄 Auth loading...');
     return <LoadingHash />;
   }
 

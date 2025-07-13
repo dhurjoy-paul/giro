@@ -7,7 +7,6 @@ import { RiUserCommunityFill } from "react-icons/ri";
 import { NavLink } from 'react-router';
 import useAuth from '../hooks/useAuth';
 import useNavbarBehavior from '../hooks/useNavbarBehavior';
-import LoadingHash from './shared/LoadingHash';
 import Announcement from './ui/Announcement';
 import Button from './ui/Button';
 import Heading from './ui/Heading';
@@ -22,7 +21,7 @@ const menuItems = [
 ]
 
 export default function Navbar() {
-  const { user, loading } = useAuth()
+  const { user } = useAuth()
   const [showAnnouncement, setShowAnnouncement] = useState(false);
   const { isNavbarVisible, isAtTop } = useNavbarBehavior();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -90,7 +89,7 @@ export default function Navbar() {
           <div className="flex items-center gap-4">
             {
               user
-                ? (<UserProfile user={user} isAtTop={isAtTop} />)
+                ? (<UserProfile isAtTop={isAtTop} />)
                 : isAtTop
                   ? (<Button label="Login" to="/auth/login" isAtTop={isAtTop} icon={<HiOutlineLogin size={22} />} />)
                   : (<Button label="Login" to="/auth/login" icon={<HiOutlineLogin size={22} />} />)

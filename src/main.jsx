@@ -1,3 +1,4 @@
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { RouterProvider } from 'react-router'
@@ -6,19 +7,23 @@ import AuthProvider from './contexts/AuthProvider'
 import './index.css'
 import router from './routes/router'
 
+const queryClient = new QueryClient()
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <AuthProvider>
-      <RouterProvider router={router} />
-      <ToastContainer
-        autoClose={3500}
-        theme="light"
-        closeOnClick
-        pauseOnFocusLoss
-        draggable
-        position="top-right"
-        newestOnTop={true}
-        rtl={false} />
-    </AuthProvider>
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        <RouterProvider router={router} />
+        <ToastContainer
+          autoClose={2500}
+          theme="light"
+          closeOnClick
+          pauseOnFocusLoss
+          draggable
+          position="top-center"
+          newestOnTop={true}
+          rtl={false} />
+      </AuthProvider>
+    </QueryClientProvider>
   </StrictMode>
 )

@@ -7,7 +7,7 @@ const ThemeToggle = () => {
   return (
     <button
       onClick={toggleTheme}
-      className="p-3 rounded-full bg-gray-50 dark:bg-gray-700 shadow-lg hover:scale-110 transition-transform"
+      className="p-3 w-fit rounded-full bg-gray-50 dark:bg-gray-700 shadow-lg hover:scale-105 transition-transform"
       title="Toggle theme"
     >
       {isDark ? <FaSun className="text-yellow-400" /> : <FaMoon className="text-gray-800" />}

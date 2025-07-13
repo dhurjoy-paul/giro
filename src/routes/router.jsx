@@ -20,6 +20,7 @@ import AssignedTour from '../pages/dashboard/tourGuide/AssignedTour';
 import ApplyGuide from '../pages/dashboard/tourist/ApplyGuide';
 import MyBookings from '../pages/dashboard/tourist/MyBookings';
 import AdminRoute from './AdminRoute';
+import CommonRoute from './CommonRoute';
 import GuideRoute from './GuideRoute';
 import PrivateRoute from './PrivateRoute';
 import TouristRoute from './TouristRoute';
@@ -46,12 +47,13 @@ const router = createBrowserRouter([
   },
   {
     path: '/dashboard',
-    element: <PrivateRoute><DashboardLayout /></PrivateRoute>,
+    element: <DashboardLayout />,
     children: [
-      // Common
-      { path: 'profile', element: <Profile /> },
-      { path: 'add-story', element: <AddStory /> },
-      { path: 'manage-story', element: <ManageStory /> },
+      { index: true, element: <PrivateRoute><Profile /></PrivateRoute> },
+
+      // for tourist and Guide
+      { path: 'add-story', element: <CommonRoute><AddStory /></CommonRoute> },
+      { path: 'manage-story', element: <CommonRoute><ManageStory /></CommonRoute> },
 
       // Tourist
       { path: 'my-bookings', element: <TouristRoute><MyBookings /></TouristRoute> },
@@ -64,9 +66,9 @@ const router = createBrowserRouter([
       { path: 'add-packages', element: <AdminRoute><AddPackages /></AdminRoute> },
       { path: 'manage-users', element: <AdminRoute><ManageUsers /></AdminRoute> },
       { path: 'manage-candidates', element: <AdminRoute><ManageCandidate /></AdminRoute> },
-      { path: 'statistics', element: <AdminRoute><Statistics /></AdminRoute> },
-    ],
-  },
+      { path: 'statistics', element: <AdminRoute><Statistics /></AdminRoute> }
+    ]
+  }
 ]);
 
 export default router;
