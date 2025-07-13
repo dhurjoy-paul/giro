@@ -1,8 +1,19 @@
-# 📜 GIRO - Title
+# 📜 GIRO —
 
-### Description
+<!-- title & description -->
 
-## Assignment Variant: Assignment12_Category_003
+> **Assignment Variant:** `Assignment12_Category_003`
+
+---
+
+## 👑 Admin Access
+
+You can log in as an admin using the credentials below:
+
+```txt
+📧 Email    :   aizen@admin.com
+🔑 Password :   Asdf1234
+```
 
 ## 🔗 Live Site
 

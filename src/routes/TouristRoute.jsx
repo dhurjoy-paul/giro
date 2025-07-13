@@ -1,0 +1,16 @@
+import { Navigate, useLocation } from 'react-router';
+import LoadingHash from '../components/shared/LoadingHash';
+import useRole from '../hooks/useRole';
+
+const TouristRoute = ({ children }) => {
+  const [role, isRoleLoading] = useRole();
+  const location = useLocation();
+
+  if (isRoleLoading) return <LoadingHash />;
+  if (role === 'tourist') return children;
+  console.log('I was here --> in Tourist route');
+
+  return <Navigate to="/" replace state={{ from: location }} />;
+};
+
+export default TouristRoute;
