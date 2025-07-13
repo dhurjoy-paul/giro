@@ -3,9 +3,9 @@ import { useState } from "react";
 import { FaXmark } from "react-icons/fa6";
 
 function hexWithOpacity(hex, opacity = 1) {
-  if (!hex?.startsWith("#") || hex.length !== 7) return hex
-  const alpha = Math.round(opacity * 255).toString(16).padStart(2, "0")
-  return hex + alpha
+  if (!hex?.startsWith("#") || hex.length !== 7) return hex;
+  const alpha = Math.round(opacity * 255).toString(16).padStart(2, "0");
+  return hex + alpha;
 }
 
 export default function CloudinaryUploader({
@@ -15,62 +15,61 @@ export default function CloudinaryUploader({
   label = "Upload Images",
   mode = "multiple",
   className = "",
-
-  // Color Customizations
-  accentColor = "#2563eb", // HEX
-  bgColor = "bg-white",     // Tailwind class
-  bgColorDark = "dark:bg-neutral-900", // Tailwind class
-
-  // Drag text color customizations
-  dragTextColor = "#1f2937",       // e.g. slate-800
-  dragTextColorDark = "#f1f5f9",   // e.g. slate-100
+  accentColor = "#2563eb",
+  bgColor = "bg-white",
+  bgColorDark = "dark:bg-neutral-900",
+  dragTextColor = "#1f2937",
+  dragTextColorDark = "#f1f5f9",
 }) {
-  const [selectedImages, setSelectedImages] = useState([])
-  const [uploadProgress, setUploadProgress] = useState(0)
-  const [isDragging, setIsDragging] = useState(false)
+  const [selectedImages, setSelectedImages] = useState([]);
+  const [uploadedImages, setUploadedImages] = useState([]);
+  const [uploadProgress, setUploadProgress] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
 
   const isDarkTheme =
     typeof window !== "undefined" &&
-    window.matchMedia?.("(prefers-color-scheme: dark)")?.matches
+    window.matchMedia?.("(prefers-color-scheme: dark)")?.matches;
 
   const handleFiles = (files) => {
-    const valid = Array.from(files).filter((file) => file.type.startsWith("image/"))
-    const allowed = valid.slice(0, maxFiles - selectedImages.length)
-    setSelectedImages((prev) => [...prev, ...allowed])
-  }
+    const valid = Array.from(files).filter((file) =>
+      file.type.startsWith("image/")
+    );
+    const allowed = valid.slice(0, maxFiles - selectedImages.length);
+    setSelectedImages((prev) => [...prev, ...allowed]);
+  };
 
   const removeImage = (index) => {
-    const updated = [...selectedImages]
-    updated.splice(index, 1)
-    setSelectedImages(updated)
-  }
+    const updated = [...selectedImages];
+    updated.splice(index, 1);
+    setSelectedImages(updated);
+  };
 
   const handleDrop = (e) => {
-    e.preventDefault()
-    setIsDragging(false)
-    handleFiles(e.dataTransfer.files)
-  }
+    e.preventDefault();
+    setIsDragging(false);
+    handleFiles(e.dataTransfer.files);
+  };
 
   const handleDragOver = (e) => {
-    e.preventDefault()
-    setIsDragging(true)
-  }
+    e.preventDefault();
+    setIsDragging(true);
+  };
 
-  const handleDragLeave = () => setIsDragging(false)
-  const handleFileChange = (e) => handleFiles(e.target.files)
+  const handleDragLeave = () => setIsDragging(false);
+  const handleFileChange = (e) => handleFiles(e.target.files);
 
   const handleUpload = async () => {
-    const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME
-    const uploadPreset = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET
+    const cloudName = import.meta.env.VITE_CLOUDINARY_CLOUD_NAME;
+    const uploadPreset = import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET;
 
-    const urls = []
+    const urls = [];
 
     for (let i = 0; i < selectedImages.length; i++) {
-      const file = selectedImages[i]
-      const formData = new FormData()
-      formData.append("file", file)
-      formData.append("upload_preset", uploadPreset)
-      if (folder) formData.append("folder", folder)
+      const file = selectedImages[i];
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("upload_preset", uploadPreset);
+      if (folder) formData.append("folder", folder);
 
       try {
         const { data } = await axios.post(
@@ -78,26 +77,28 @@ export default function CloudinaryUploader({
           formData,
           {
             onUploadProgress: (e) => {
-              const percent = Math.round((e.loaded * 100) / e.total)
-              setUploadProgress(percent)
+              const percent = Math.round((e.loaded * 100) / e.total);
+              setUploadProgress(percent);
             },
           }
-        )
-        urls.push(data.secure_url)
+        );
+        urls.push(data.secure_url);
       } catch (err) {
-        console.error("Upload failed for", file.name, err)
+        console.error("Upload failed for", file.name, err);
       }
     }
 
-    setSelectedImages([])
-    setUploadProgress(0)
+    setUploadProgress(0);
+    setSelectedImages([]);
+
+    setUploadedImages((prev) => [...prev, ...urls]);
 
     if (mode === "single") {
-      onUploadComplete?.(urls[0] || null)
+      onUploadComplete?.(urls[0] || null);
     } else {
-      onUploadComplete?.(urls)
+      onUploadComplete?.(urls);
     }
-  }
+  };
 
   return (
     <div className={`w-full ${className} mb-3`}>
@@ -121,14 +122,20 @@ export default function CloudinaryUploader({
         <p
           style={{
             color: isDragging
-              ? hexWithOpacity(isDarkTheme ? dragTextColorDark : dragTextColor, 0.5)
+              ? hexWithOpacity(
+                isDarkTheme ? dragTextColorDark : dragTextColor,
+                0.5
+              )
               : isDarkTheme
                 ? dragTextColorDark
                 : dragTextColor,
           }}
         >
           Drag & drop or{" "}
-          <label className="cursor-pointer underline" style={{ color: accentColor }}>
+          <label
+            className="cursor-pointer underline"
+            style={{ color: accentColor }}
+          >
             browse
             <input
               type="file"
@@ -141,7 +148,7 @@ export default function CloudinaryUploader({
         </p>
       </div>
 
-      {/* Previews */}
+      {/* Preview Selected (before upload) */}
       {selectedImages.length > 0 && (
         <div className="grid grid-cols-3 sm:grid-cols-4 gap-4 mt-4">
           {selectedImages.map((file, idx) => (
@@ -166,18 +173,20 @@ export default function CloudinaryUploader({
       {selectedImages.length > 0 && (
         <div className="text-center mt-6">
           <button
+            type="button"
             onClick={handleUpload}
             className="text-white px-5 py-2 rounded-md font-medium"
             style={{
               backgroundColor: accentColor,
             }}
           >
-            Upload {selectedImages.length} Image{selectedImages.length > 1 ? "s" : ""}
+            Upload {selectedImages.length} Image
+            {selectedImages.length > 1 ? "s" : ""}
           </button>
         </div>
       )}
 
-      {/* Progress Bar */}
+      {/* Upload Progress */}
       {uploadProgress > 0 && (
         <div className="mt-4">
           <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
@@ -192,6 +201,20 @@ export default function CloudinaryUploader({
           <p className="text-sm text-center mt-1">{uploadProgress}%</p>
         </div>
       )}
+
+      {/* ✅ Uploaded Image Previews */}
+      {uploadedImages.length > 0 && (
+        <div className="grid grid-cols-3 sm:grid-cols-4 gap-4 mt-6">
+          {uploadedImages.map((url, idx) => (
+            <img
+              key={idx}
+              src={url}
+              alt={`uploaded-${idx}`}
+              className="rounded-md w-full h-24 object-cover border"
+            />
+          ))}
+        </div>
+      )}
     </div>
-  )
+  );
 }
