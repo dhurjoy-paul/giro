@@ -71,6 +71,7 @@ const EditProfileModal = ({ onClose, refetch }) => {
       notifyFailed('', 'Failed to update profile');
     } finally {
       setLoading(false);
+      refetch();
     }
   };
 

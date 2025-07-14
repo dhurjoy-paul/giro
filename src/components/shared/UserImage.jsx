@@ -1,12 +1,29 @@
+import { useQuery } from '@tanstack/react-query';
 import clsx from 'clsx';
 import useAuth from "../../hooks/useAuth";
+import useAxiosSecure from '../../hooks/useAxiosSecure';
+import LoadingHash from './LoadingHash';
 
 const UserImage = ({ isAtTop = false, size = "sm", dashboard = false }) => {
   const { user } = useAuth();
-  const hasPhoto = !!user?.photoURL;
+  const axiosSecure = useAxiosSecure();
 
-  const initials = user?.displayName
-    ? user.displayName.split(" ").map(part => part[0]).join('').slice(0, 2).toUpperCase()
+  const { data: userData = {}, isLoading, refetch } = useQuery({
+    queryKey: ['userData', user?.email],
+    queryFn: async () => {
+      const res = await axiosSecure.get(`/users/${user?.email}`);
+      return res.data;
+    },
+    enabled: !!user?.email,
+  });
+  const { name, email, role, image, uid } = userData || {};
+
+  if (isLoading) return <LoadingHash />;
+
+  const hasPhoto = image;
+
+  const initials = name
+    ? name.split(" ").map(part => part[0]).join('').slice(0, 2).toUpperCase()
     : 'U';
 
   const avatarSizeClass = size === "lg" ? "size-11 text-xl" : "size-9 text-sm";
@@ -31,8 +48,8 @@ const UserImage = ({ isAtTop = false, size = "sm", dashboard = false }) => {
       {user ? (
         hasPhoto ? (
           <img
-            src={user.photoURL}
-            alt={user.displayName || 'User'}
+            src={image}
+            alt={name || 'User'}
             className={clsx(imageSizeClass, 'object-cover', roundClass, 'animate-fade-in')}
           />
         ) : (
