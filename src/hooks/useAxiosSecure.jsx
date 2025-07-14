@@ -5,7 +5,6 @@ import useAuth from './useAuth';
 
 export const axiosSecure = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
-  withCredentials: true,
 });
 
 const useAxiosSecure = () => {
@@ -13,25 +12,32 @@ const useAxiosSecure = () => {
   const { logOut } = useAuth();
 
   useEffect(() => {
-    const interceptor = axiosSecure.interceptors.response.use(
-      res => {
-        return res
+    const requestInterceptor = axiosSecure.interceptors.request.use(
+      config => {
+        const token = localStorage.getItem('token');
+        if (token) {
+          config.headers.Authorization = `Bearer ${token}`;
+        }
+        return config;
       },
-      async error => {
-        console.log('Error caught from axios interceptor -->', error.response);
+      error => Promise.reject(error)
+    );
 
+    const responseInterceptor = axiosSecure.interceptors.response.use(
+      res => res,
+      async error => {
         const status = error?.response?.status;
         if (status === 401 || status === 403) {
           await logOut();
           navigate('/auth/login');
         }
-
         return Promise.reject(error);
       }
     );
 
     return () => {
-      axiosSecure.interceptors.response.eject(interceptor);
+      axiosSecure.interceptors.request.eject(requestInterceptor);
+      axiosSecure.interceptors.response.eject(responseInterceptor);
     };
   }, [logOut, navigate]);
 

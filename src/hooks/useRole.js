@@ -6,7 +6,7 @@ const useRole = () => {
   const { user, loading: authLoading } = useAuth();
   const axiosSecure = useAxiosSecure();
 
-  const { data, isLoading: isRoleLoading, isError, error } = useQuery({
+  const { data: role, isLoading: isRoleLoading, isError, error } = useQuery({
     queryKey: ['user-role', user?.email],
     enabled: !authLoading && !!user?.email,
     queryFn: async () => {
@@ -17,7 +17,7 @@ const useRole = () => {
 
   if (isError) { console.error('Failed to fetch role:', error) }
 
-  return [data, isRoleLoading];
+  return [role, isRoleLoading];
 };
 
 export default useRole;

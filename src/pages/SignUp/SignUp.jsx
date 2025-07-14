@@ -33,8 +33,7 @@ const SignUp = () => {
 
   // Toast Components
   const notifySuccess = (msg) => toast.success(<ToastSuccess msg={msg} />);
-  const notifyFailed = (error, msg) =>
-    toast.error(<ToastFailed error={error} msg={msg} />);
+  const notifyFailed = (error, msg) => toast.error(<ToastFailed error={error} msg={msg} />);
   const ToastSuccess = ({ msg }) => (
     <span className="text-lg text-green-600 font-semibold font-bricolage-grotesque leading-6">
       {msg}

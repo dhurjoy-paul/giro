@@ -15,7 +15,7 @@ import ManageUsers from '../pages/dashboard/admin/ManageUsers';
 import Statistics from '../pages/dashboard/admin/Statistics';
 import AddStory from '../pages/dashboard/common/AddStory';
 import ManageStory from '../pages/dashboard/common/ManageStory';
-import Profile from '../pages/dashboard/common/Profile';
+import Profile from '../pages/dashboard/common/Profile/Profile';
 import AssignedTour from '../pages/dashboard/tourGuide/AssignedTour';
 import ApplyGuide from '../pages/dashboard/tourist/ApplyGuide';
 import MyBookings from '../pages/dashboard/tourist/MyBookings';

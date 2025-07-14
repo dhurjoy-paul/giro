@@ -83,7 +83,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
       </Transition.Root>
 
       {/* ===== Desktop Sidebar ===== */}
-      <div className="hidden lg:flex lg:flex-shrink-0 z-20">
+      <div className="hidden lg:flex lg:flex-shrink-0 z-20 border-r border-text-muted/20 dark:border-text-muted/40">
         <div className="relative flex flex-col w-70 h-screen bg-sidebar text-text px-4 pt-4 pb-6">
           {/* Fixed heading */}
           <div className="absolute top-8 left-8">

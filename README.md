@@ -97,7 +97,12 @@ ph-assignment-12-client
 │  │  │  ├─ common
 │  │  │  │  ├─ AddStory.jsx
 │  │  │  │  ├─ ManageStory.jsx
-│  │  │  │  └─ Profile.jsx
+│  │  │  │  └─ Profile
+│  │  │  │     ├─ EditProfileModal.jsx
+│  │  │  │     ├─ Profile.jsx
+│  │  │  │     ├─ ProfileInfo.jsx
+│  │  │  │     ├─ WelcomeBanner.jsx
+│  │  │  │     └─ welcomeMessages.js
 │  │  │  ├─ menus
 │  │  │  │  ├─ AdminMenu.jsx
 │  │  │  │  ├─ TourGuideMenu.jsx
