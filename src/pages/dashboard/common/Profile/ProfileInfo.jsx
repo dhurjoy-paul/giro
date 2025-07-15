@@ -55,7 +55,7 @@ const ProfileInfo = () => {
             <span className="absolute bottom-1 right-1 w-4 h-4 bg-green-500 border-2 border-white dark:border-bg-dark rounded-full" />
           </div>
           <h2 className="mt-4 text-2xl font-semibold text-text font-bricolage-grotesque">{name}</h2>
-          <p className="uppercase text-text-muted font-medium">{role}</p>
+          <p className="uppercase text-text-muted font-medium">{role === 'tourGuide' ? 'tour guide' : role}</p>
         </div>
 
         {/* Right Column */}
