@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import { FaPaperPlane } from "react-icons/fa";
 import { FaFaceSadTear } from "react-icons/fa6";
+import { MdPendingActions } from "react-icons/md";
 import { toast } from "react-toastify";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
@@ -39,7 +40,9 @@ const ApplyGuide = () => {
 
   const handleApply = async (e) => {
     e.preventDefault();
-    if (!title || !reason || !cvLink) return notifyFailed('', "All fields are required.");
+    if (!title || !reason || !cvLink) {
+      return notifyFailed('', "All fields are required.");
+    }
 
     try {
       const res = await axiosSecure.post("/applications", {
@@ -54,11 +57,19 @@ const ApplyGuide = () => {
       if (res.data?.insertedId) {
         notifySuccess("Application submitted successfully!");
         refetch();
+      } else if (res.data?.updated) {
+        notifySuccess("Re-application submitted successfully!");
+        refetch();
       }
     } catch (err) {
-      notifyFailed(err.message, "Failed to submit application.");
+      if (err?.response?.status === 409) {
+        notifyFailed('', "You have already applied. Please wait for admin review.");
+      } else {
+        notifyFailed(err.message, "Failed to submit application.");
+      }
     }
   };
+
 
   const showForm = !existingApplication || existingApplication?.status === 'rejected';
 
@@ -79,12 +90,12 @@ const ApplyGuide = () => {
         <div className="flex justify-center items-center min-h-[80vh] pb-20">
           <div className="flex w-[80%] flex-col items-center justify-center bg-emerald-50/80 dark:bg-emerald-50/85 border border-emerald-300 text-emerald-700 py-3 mb-8 mx-2 rounded-2xl">
             <p className="font-semibold text-2xl font-bricolage-grotesque flex items-center justify-center gap-4 px-8">
-              <span className="block"><FaFaceSadTear size={24} /></span>
+              <span className="block"><MdPendingActions size={24} /></span>
               <span className="text-center">Your application is under review.</span>
             </p>
             <p className="flex items-center justify-around gap-12 text-lg font-medium mt-1">
-              <p><span>Application ID:</span> <span className="font-semibold">{existingApplication._id} 124</span></p>
-              <p><span>Status:</span> <span className="capitalize font-semibold">{existingApplication.status} hello</span></p>
+              <p><span>Application ID:</span> <span className="font-semibold">{existingApplication._id}</span></p>
+              <p><span>Status:</span> <span className="capitalize font-semibold">{existingApplication.status}</span></p>
             </p>
           </div>
         </div>

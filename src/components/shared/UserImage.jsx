@@ -2,7 +2,6 @@ import { useQuery } from '@tanstack/react-query';
 import clsx from 'clsx';
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from '../../hooks/useAxiosSecure';
-import LoadingHash from './LoadingHash';
 
 const UserImage = ({ isAtTop = false, size = "sm", dashboard = false }) => {
   const { user } = useAuth();
@@ -17,8 +16,6 @@ const UserImage = ({ isAtTop = false, size = "sm", dashboard = false }) => {
     enabled: !!user?.email,
   });
   const { name, email, role, image, uid } = userData || {};
-
-  if (isLoading) return <LoadingHash />;
 
   const hasPhoto = image;
 
