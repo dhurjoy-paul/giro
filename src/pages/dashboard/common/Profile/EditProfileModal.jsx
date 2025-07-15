@@ -1,17 +1,21 @@
 import { Dialog, Transition } from '@headlessui/react';
+import { motion } from 'framer-motion';
 import { Fragment, useEffect, useState } from 'react';
+import { FaPencil } from "react-icons/fa6";
 import { HiXMark } from 'react-icons/hi2';
 import { toast } from 'react-toastify';
 import LoadingHash from '../../../../components/shared/LoadingHash';
 import CloudinaryUploader from '../../../../components/ui/CloudinaryUploader';
 import useAuth from '../../../../hooks/useAuth';
 import useAxiosSecure from '../../../../hooks/useAxiosSecure';
+import useRole from '../../../../hooks/useRole';
 
 const EditProfileModal = ({ onClose, refetch }) => {
   const axiosSecure = useAxiosSecure();
+  const [role, isRoleLoading] = useRole()
   const { user, loading: authLoading, updateUserProfile } = useAuth();
   const [form, setForm] = useState({ name: user?.displayName || '' });
-  const [photoURL, setPhotoURL] = useState(null);
+  const [photoURL, setPhotoURL] = useState(user?.photoURL);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -42,7 +46,7 @@ const EditProfileModal = ({ onClose, refetch }) => {
     </div>
   );
 
-  if (authLoading) return <LoadingHash />;
+  if (authLoading || isRoleLoading) return <LoadingHash />;
 
   const handleUpdate = async (e) => {
     e.preventDefault();
@@ -61,7 +65,7 @@ const EditProfileModal = ({ onClose, refetch }) => {
     if (photoURL) updateData.image = photoURL;
 
     setLoading(true);
-    
+
     try {
       await updateUserProfile(form.name, photoURL);
       await axiosSecure.patch(`/users/${user.email}`, updateData);
@@ -111,6 +115,25 @@ const EditProfileModal = ({ onClose, refetch }) => {
                 </div>
 
                 <form className="space-y-4" onSubmit={handleUpdate}>
+
+                  <div className=''>
+                    <label className="block mb-1 text-sm">Role (non-editable)</label>
+                    <p className="w-fit capitalize px-3 py-2 rounded-md bg-input text-text">
+                      {role === 'tourGuide' ? 'Tour Guide' : role}
+                    </p>
+                  </div>
+
+                  <div>
+                    <label className="block mb-1 text-sm">Email (non-editable)</label>
+                    <input
+                      type="text"
+                      name="name"
+                      defaultValue={user?.email}
+                      disabled
+                      className="w-full px-3 py-2 rounded-md bg-input text-black dark:text-white"
+                    />
+                  </div>
+
                   <div>
                     <label className="block mb-1 text-sm">Name</label>
                     <input
@@ -135,14 +158,20 @@ const EditProfileModal = ({ onClose, refetch }) => {
                     onUploadComplete={setPhotoURL}
                   />
 
-                  <div className="mt-6 flex justify-end">
-                    <button
+                  <div className="mt-6 flex justify-center w-full">
+                    {/* <button
                       type="submit"
                       disabled={loading || !form.name.trim()}
                       className="bg-brand text-white px-5 py-2 rounded-lg hover:bg-brand-dark font-medium disabled:opacity-50 disabled:cursor-not-allowed"
                     >
                       {loading ? 'Updating...' : 'Update'}
-                    </button>
+                    </button> */}
+                    <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} className="block">
+                      <button type="submit" disabled={loading || !form.name.trim()} className='w-full flex items-center justify-center gap-2 relative z-10 rounded-full shadow-md transition-colors focus:outline-none focus-visible:outline-2 focus-visible:outline-offset-2 px-5 py-1.5 text-lg font-medium bg-text text-background '>
+                        <FaPencil />
+                        Update
+                      </button>
+                    </motion.div>
                   </div>
                 </form>
               </Dialog.Panel>
