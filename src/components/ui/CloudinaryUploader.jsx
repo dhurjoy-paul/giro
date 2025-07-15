@@ -13,6 +13,7 @@ export default function CloudinaryUploader({
   maxFiles = 5,
   folder = "",
   label = "Upload Images",
+  labelClass = "font-normal text-text/60 text-[17px]",
   mode = "multiple",
   className = "",
   accentColor = "#2563eb",
@@ -102,11 +103,11 @@ export default function CloudinaryUploader({
 
   return (
     <div className={`w-full ${className} mb-3`}>
-      <h2 className="font-normal mb-2 text-text/60 text-[17px]">{label}</h2>
+      <h2 className={labelClass}>{label}</h2>
 
       {/* Drop Zone */}
       <div
-        className={`border-2 border-dashed rounded-lg p-6 text-center transition
+        className={`border-2 border-dashed rounded-lg mt-2 p-6 text-center transition
           ${bgColor} ${bgColorDark}
         `}
         style={{

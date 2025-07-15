@@ -4,7 +4,7 @@ import WelcomeBanner from './WelcomeBanner';
 const Profile = () => {
 
   return (
-    <div className="max-w-full mx-auto px-4 sm:px-8 py-10 text-text">
+    <div className="w-full mx-auto px-4 sm:px-8 py-10 text-text">
       <WelcomeBanner />
       <ProfileInfo />
     </div>

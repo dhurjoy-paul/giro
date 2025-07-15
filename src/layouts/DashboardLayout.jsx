@@ -35,9 +35,9 @@ export default function DashboardLayout() {
           </div>
 
           {/* Dynamic Content */}
-          <main className="flex-1 overflow-y-auto bg-background">
-            <div className='relative bg-background isolate overflow-y-hidden min-h-screen'
-            >{/* Blurred BGs */}
+          <main className="flex-1 bg-background overflow-auto">
+            <div className='relative bg-background isolate min-h-screen px-2 sm:px-4 py-6'>
+              {/* Blurred BGs */}
               <div aria-hidden="true" className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80">
                 <div style={{
                   clipPath:

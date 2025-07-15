@@ -61,6 +61,7 @@ const EditProfileModal = ({ onClose, refetch }) => {
     if (photoURL) updateData.image = photoURL;
 
     setLoading(true);
+    
     try {
       await updateUserProfile(form.name, photoURL);
       await axiosSecure.patch(`/users/${user.email}`, updateData);

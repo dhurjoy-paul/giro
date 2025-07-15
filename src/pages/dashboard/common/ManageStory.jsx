@@ -1,6 +1,10 @@
+import StoryCards from "./StoryCards"
+
 const ManageStory = () => {
   return (
-    <div>ManageStory</div>
+    <div children=''>
+      <StoryCards />
+    </div>
   )
 }
 export default ManageStory

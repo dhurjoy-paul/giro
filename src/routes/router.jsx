@@ -14,6 +14,7 @@ import ManageCandidate from '../pages/dashboard/admin/ManageCandidate';
 import ManageUsers from '../pages/dashboard/admin/ManageUsers';
 import Statistics from '../pages/dashboard/admin/Statistics';
 import AddStory from '../pages/dashboard/common/AddStory';
+import EditStory from '../pages/dashboard/common/EditStory';
 import ManageStory from '../pages/dashboard/common/ManageStory';
 import Profile from '../pages/dashboard/common/Profile/Profile';
 import AssignedTour from '../pages/dashboard/tourGuide/AssignedTour';
@@ -54,6 +55,7 @@ const router = createBrowserRouter([
       // for tourist and Guide
       { path: 'add-story', element: <CommonRoute><AddStory /></CommonRoute> },
       { path: 'manage-story', element: <CommonRoute><ManageStory /></CommonRoute> },
+      { path: 'edit-story/:id', element: <CommonRoute><EditStory /></CommonRoute> },
 
       // Tourist
       { path: 'my-bookings', element: <TouristRoute><MyBookings /></TouristRoute> },

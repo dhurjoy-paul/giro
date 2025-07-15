@@ -55,11 +55,10 @@ const WelcomeBanner = () => {
   return (
     <div
       data-aos="fade-up"
-      className="relative isolate flex items-center gap-x-6 overflow-hidden rounded-2xl bg-bg-light dark:bg-bg-dark px-6 py-2 sm:px-8 shadow-sm border border-border font-bricolage-grotesque"
+      className="relative max-w-5xl mx-auto isolate flex items-center justify-center gap-x-6 overflow-hidden rounded-2xl bg-bg-light dark:bg-bg-dark px-6 py-2 sm:px-8 shadow-sm border border-border font-bricolage-grotesque"
     >
       {/* Gradient Blob */}
-      <div
-        aria-hidden="true"
+      <div aria-hidden="true"
         className="absolute top-1/2 left-[-7rem] -z-10 -translate-y-1/2 transform-gpu blur-2xl opacity-30"
       >
         <div
@@ -72,40 +71,48 @@ const WelcomeBanner = () => {
       </div>
 
       {/* Message Content */}
-      <div className="flex flex-wrap items-center gap-x-4 gap-y-2 min-h-[50px]">
-        <p className="text-sm text-text w-full">
-          <strong className="font-semibold">Welcome, {name}!</strong>
-          <svg viewBox="0 0 2 2" aria-hidden="true" className="mx-2 inline size-0.5 fill-current">
-            <circle r={1} cx={1} cy={1} />
-          </svg>
+      <div className="flex items-center justify-between w-5xl min-h-[50px]">
 
-          {/* Animated message */}
-          <AnimatePresence mode="wait">
-            <motion.span
-              key={currentIndex}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.4 }}
-              className="inline-block"
-            >
-              {roleMessages[currentIndex]}
-            </motion.span>
-          </AnimatePresence>
-        </p>
+        <div className="flex-1 text-center px-4">
+          <p className="text-sm text-text inline-block">
+            <strong className="font-semibold">Welcome, {name}!</strong>
+            <svg viewBox="0 0 2 2" aria-hidden="true" className="mx-2 inline size-0.5 fill-current">
+              <circle r={1} cx={1} cy={1} />
+            </svg>
+
+            <AnimatePresence mode="wait">
+              <motion.span
+                key={currentIndex}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.4 }}
+                className="inline-block"
+              >
+                {roleMessages[currentIndex]}
+              </motion.span>
+            </AnimatePresence>
+          </p>
+        </div>
+
+
+        <div className="shrink-0 pl-4">
+          <button
+            type="button"
+            onClick={() => setVisible(false)}
+            className="p-2 text-text hover:text-text-muted transition"
+          >
+            <span className="sr-only">Dismiss</span>
+            <HiXMark className="size-7" />
+          </button>
+        </div>
       </div>
 
-      {/* Dismiss Button */}
-      <div className="flex flex-1 justify-end">
-        <button
-          type="button"
-          onClick={() => setVisible(false)}
-          className="p-2 text-text hover:text-text-muted transition"
-        >
-          <span className="sr-only">Dismiss</span>
-          <HiXMark className="size-7" />
-        </button>
+      <div aria-hidden="true" className="absolute top-0 left-1/2 -z-10 -translate-x-1/2 blur-3xl xl:-top-6">
+        <div className="aspect-1155/678 w-288.75 bg-gradient-to-tr from-amber-200 to-emerald-200 opacity-30"
+          style={{ clipPath: 'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)' }} />
       </div>
+
     </div>
   );
 };

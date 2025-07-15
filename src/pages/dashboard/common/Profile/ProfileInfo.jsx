@@ -2,11 +2,13 @@ import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 import { HiIdentification, HiOutlineMail } from 'react-icons/hi';
 import { HiOutlineClipboard, HiPencil } from 'react-icons/hi2';
-import { Link } from 'react-router';
+import { LuBadgePlus } from "react-icons/lu";
 import LoadingHash from '../../../../components/shared/LoadingHash';
+import Button from '../../../../components/ui/Button';
 import useAuth from '../../../../hooks/useAuth';
 import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 import EditProfileModal from './EditProfileModal';
+
 
 const ProfileInfo = () => {
   const { user } = useAuth();
@@ -36,7 +38,7 @@ const ProfileInfo = () => {
     "inline-flex items-center gap-2 text-sm font-medium text-white bg-brand px-4 py-2 rounded-md shadow-md hover:scale-105 hover:brightness-110 transition-all duration-200";
 
   return (
-    <section className="w-full px-4 sm:px-8 py-8 flex justify-center">
+    <section className="w-fit mx-auto px-4 sm:px-8 py-8 flex justify-center">
       <div className="glass-card w-full max-w-6xl rounded-2xl p-6 sm:p-12 md:p-18 lg:p-20 flex flex-col md:flex-row items-center gap-8 md:gap-12 transition-all duration-300 border border-border relative overflow-hidden">
 
 
@@ -63,7 +65,7 @@ const ProfileInfo = () => {
             <div className="flex items-center justify-between bg-input px-4 py-3 rounded-md border border-dashed border-text-muted/50">
               <div className="flex items-center gap-2 text-text">
                 <HiIdentification size={18} />
-                <span className="text-sm break-all">UID: {uid}</span>
+                <span className="text-base tracking-wider break-all">UID: {uid}</span>
               </div>
               <button onClick={() => handleCopy(uid, 'uid')}>
                 <HiOutlineClipboard className="ml-1.5 text-text-muted hover:text-text transition" />
@@ -79,7 +81,7 @@ const ProfileInfo = () => {
             <div className="flex items-center justify-between bg-input px-4 py-3 rounded-md border border-dashed border-text-muted/50">
               <div className="flex items-center gap-2 text-text">
                 <HiOutlineMail size={18} />
-                <span className="text-sm break-all">Email: {email}</span>
+                <span className="text-base tracking-wider break-all">Email: {email}</span>
               </div>
               <button onClick={() => handleCopy(email, 'email')}>
                 <HiOutlineClipboard className="text-text-muted hover:text-text transition" />
@@ -91,14 +93,14 @@ const ProfileInfo = () => {
           </div>
 
           {/* Action Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4">
-            <button onClick={() => setIsModalOpen(true)} className={actionBtnClass}>
-              <HiPencil className="text-lg" />
-              Edit Profile
-            </button>
-            <Link to='/dashboard/apply-guide' className={actionBtnClass}>
-              Apply For Tour Guide
-            </Link>
+          <div className="flex flex-col md:flex-row gap-4">
+            <Button label="Edit Profile" onClick={() => setIsModalOpen(true)} icon={<HiPencil size={24} />} />
+
+            {
+              role === 'tourist'
+              && <Button to='/dashboard/apply-guide' invert={true} label="Become a Tour Guide" icon={<LuBadgePlus size={24} />} />
+            }
+
           </div>
         </div>
       </div>
