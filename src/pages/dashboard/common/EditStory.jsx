@@ -1,10 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import { FaBackspace } from "react-icons/fa";
 import { FaXmark } from "react-icons/fa6";
 import { MdHistoryEdu } from "react-icons/md";
 import { useNavigate, useParams } from "react-router";
 import { toast } from "react-toastify";
+import Button from "../../../components/ui/Button";
 import CloudinaryUploader from "../../../components/ui/CloudinaryUploader";
 import useAuth from "../../../hooks/useAuth";
 import useAxiosSecure from "../../../hooks/useAxiosSecure";
@@ -92,6 +94,9 @@ const EditStory = () => {
 
   return (
     <div className="glass-card w-full max-w-6xl mx-auto flex flex-col justify-center items-center rounded-2xl transition-all duration-300 border border-border px-6 py-16 lg:px-8 mt-2">
+
+      <Button className="mb-8" invert label="Go Back" onClick={() => navigate(-1)} icon={<FaBackspace size={24} />} />
+
       <div className="mx-auto max-w-2xl text-center">
         <h2 className="text-4xl font-semibold font-bricolage-grotesque tracking-tight text-balance text-text sm:text-5xl">
           Edit Your Experience
@@ -180,7 +185,7 @@ const EditStory = () => {
         </div>
 
         {/* submit */}
-        <div className="mt-6">
+        <div className="mt-6 flex flex-col gap-2">
           <motion.button
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
@@ -190,6 +195,7 @@ const EditStory = () => {
             <MdHistoryEdu size={24} />
             Update Story
           </motion.button>
+
         </div>
       </form>
     </div>
