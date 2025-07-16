@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 import { FaFileCircleCheck } from "react-icons/fa6";
-import { HiEye, HiTrash } from "react-icons/hi";
+import { HiTrash } from "react-icons/hi";
 import { TbMoodSpark } from "react-icons/tb";
 import { useNavigate } from 'react-router';
 import { toast } from 'react-toastify';
@@ -125,12 +125,12 @@ const ManageCandidate = () => {
                   <td className="px-4 py-3 text-center">{application.applied_at ? new Date(application.applied_at).toLocaleDateString() : 'N/A'}</td>
                   <td className="px-8 py-2 align-middle">
                     <div className="flex gap-2 justify-center items-center">
-                      <button onClick={() => navigate('/dashboard')} className="group">
+                      {/* <button onClick={() => navigate('/dashboard')} className="group">
                         <div className="flex items-center justify-center gap-2 rounded-md bg-text/5 p-2 ring-1 ring-text/10 group-hover:bg-amber-400/8 group-hover:ring-amber-400/20">
                           <HiEye className="size-5 text-text group-hover:text-amber-400" />
                           <p className='text-text capitalize font-bricolage-grotesque font-semibold group-hover:text-amber-400'>view</p>
                         </div>
-                      </button>
+                      </button> */}
                       <button onClick={() => handleAccept(application._id)} className="group">
                         <div className="flex items-center justify-center gap-2 rounded-md bg-text/5 p-2 ring-1 ring-text/20 group-hover:bg-brand/8 group-hover:ring-brand/20">
                           <FaFileCircleCheck className="size-4 text-text group-hover:text-brand" />
