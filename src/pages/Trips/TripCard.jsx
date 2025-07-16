@@ -7,7 +7,7 @@ const TripCard = ({ trip }) => {
   const navigate = useNavigate();
 
   return (
-    <div className="rounded-3xl overflow-hidden transition duration-300 group bg-white dark:bg-zinc-900 border border-border shadow-sm hover:shadow-md">
+    <div className="rounded-3xl overflow-hidden transition duration-300 group bg-bg-light/10 shadow-lg hover:shadow-xl">
       <div className="relative">
         <img
           src={trip.images?.[0] || "/fallback.jpg"}
@@ -44,7 +44,7 @@ const TripCard = ({ trip }) => {
           <motion.button
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
-            onClick={() => navigate(`/packages/${trip._id}`)}
+            onClick={() => navigate(`/trip/${trip._id}`)}
             className="w-full flex items-center justify-center gap-2 rounded-full shadow-md transition duration-200 bg-gray-900 text-white hover:bg-gray-800 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-200 px-5 py-2 text-sm sm:text-base font-medium"
           >
             <TbListDetails size={20} />

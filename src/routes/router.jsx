@@ -5,9 +5,11 @@ import MainLayout from '../layouts/MainLayout';
 import AboutUs from '../pages/AboutUs/AboutUs';
 import Community from '../pages/Community/Community';
 import ErrorPage from '../pages/Error/ErrorPage';
+import GuideDetails from '../pages/Guide/GuideDetails';
 import Home from '../pages/Home/Home';
 import Login from '../pages/Login/Login';
 import SignUp from '../pages/SignUp/SignUp';
+import TripDetails from '../pages/Trips/TripDetails';
 import Trips from '../pages/Trips/Trips';
 import AddPackages from '../pages/dashboard/admin/AddPackages';
 import ManageCandidate from '../pages/dashboard/admin/ManageCandidate';
@@ -34,6 +36,8 @@ const router = createBrowserRouter([
     children: [
       { path: '/', element: <Home /> },
       { path: '/trips', element: <Trips /> },
+      { path: '/trip/:id', element: <TripDetails /> },
+      { path: '/tour-guides/:id', element: <GuideDetails /> },
       { path: '/community', element: <Community /> },
       { path: '/about-us', element: <AboutUs /> },
     ],

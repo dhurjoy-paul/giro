@@ -78,10 +78,12 @@ const ManageCandidate = () => {
   };
 
   if (isLoading) return <LoadingHash />;
+  console.log(data.data.length)
 
   return (
-    data.data.length > 0
-      ? <div className="glass-card w-full max-w-screen-xl mx-auto flex flex-col justify-between items-stretch rounded-2xl border border-border px-2 sm:px-4 py-6 font-bricolage-grotesque mt-6">
+
+    (data.data.length > 0)
+      ? (<div className="glass-card w-full max-w-screen-xl mx-auto flex flex-col justify-between items-stretch rounded-2xl border border-border px-2 sm:px-4 py-6 font-bricolage-grotesque mt-6">
 
         <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mb-4 px-1">
           <input
@@ -190,16 +192,8 @@ const ManageCandidate = () => {
             </button>
           </div>
         </div>
-
-        <div className="bg-emerald-50/80 dark:bg-emerald-50/85 border border-emerald-300 text-emerald-700 py-3 mb-8 mx-2 rounded-2xl">
-          <p className="font-semibold text-lg font-bricolage-grotesque flex items-center justify-center gap-4 px-8">
-            <span className="block"><TbMoodSpark size={26} /></span>
-            <span>No application for check. Chill !!!</span>
-          </p>
-        </div>
-
-      </div>
-      : <EmptyState label="No application for check. Chill !!!" icon={TbMoodSpark} />
+      </div>)
+      : (<EmptyState label="No application for check. Chill !!!" icon={TbMoodSpark} />)
   );
 };
 

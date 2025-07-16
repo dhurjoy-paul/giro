@@ -104,7 +104,7 @@ export default function StoryCards() {
             )}
 
             {/* Content */}
-            <p className="text-text/80 px-1">{story.content.slice(0, 500)}...</p>
+            <p className="text-text/80 px-1">{story?.content?.slice(0, 500)}...</p>
 
 
           </div>
