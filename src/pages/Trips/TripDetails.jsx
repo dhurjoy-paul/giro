@@ -61,6 +61,7 @@ const TripDetails = () => {
     e.preventDefault();
     if (!user || !role) return navigate("/auth/login");
     if (role === "tourGuide") return notifyFailed("You are Tour-Guide you can't book", "You can't book tours");
+    if (role === "admin") return notifyFailed("You are Admin you can't book", "You can't book tours");
 
     const selectedGuide = guides.find((g) => g._id === selectedGuideId);
 
@@ -177,7 +178,7 @@ const TripDetails = () => {
         {/* Booking Form */}
         <section className="glass-card p-8 space-y-6 mb-2 mt-20 max-w-4xl mx-auto">
           <h2 className="text-3xl font-bold text-text text-center mb-16 font-bricolage-grotesque">
-            Book {pkg.title}
+            Book "{pkg.title}"
           </h2>
 
           <form onSubmit={handleBooking} className="w-full grid grid-cols-1 sm:grid-cols-2 gap-6 font-bricolage-grotesque">

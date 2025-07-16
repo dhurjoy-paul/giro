@@ -22,6 +22,7 @@ import Profile from '../pages/dashboard/common/Profile/Profile';
 import AssignedTour from '../pages/dashboard/tourGuide/AssignedTour';
 import ApplyGuide from '../pages/dashboard/tourist/ApplyGuide';
 import MyBookings from '../pages/dashboard/tourist/MyBookings';
+import Payment from '../pages/dashboard/tourist/Payment';
 import AdminRoute from './AdminRoute';
 import CommonRoute from './CommonRoute';
 import GuideRoute from './GuideRoute';
@@ -64,6 +65,7 @@ const router = createBrowserRouter([
       // Tourist
       { path: 'my-bookings', element: <TouristRoute><MyBookings /></TouristRoute> },
       { path: 'apply-guide', element: <TouristRoute><ApplyGuide /></TouristRoute> },
+      { path: 'payments/:id', element: <TouristRoute><Payment /></TouristRoute> },
 
       // Tour Guide
       { path: 'assigned-tours', element: <GuideRoute><AssignedTour /></GuideRoute> },
