@@ -161,7 +161,7 @@ const TripDetails = () => {
           <div className="flex flex-wrap gap-4">
             {guides.map((guide) => (
               <div key={guide._id}
-                onClick={() => navigate(`/tour-guides/${guide._id}`)}
+                onClick={() => navigate(`/tour-guide/${guide.email}`)}
                 className="cursor-pointer flex flex-col items-center justify-center bg-bg-light border border-border p-4 rounded-xl shadow hover:shadow-md transition"
               >
                 <img

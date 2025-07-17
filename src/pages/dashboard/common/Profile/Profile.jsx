@@ -8,32 +8,32 @@ import ProfileInfo from './ProfileInfo';
 import WelcomeBanner from './WelcomeBanner';
 
 const Profile = () => {
-  const { user } = useAuth()
+  const { user } = useAuth();
   const [role, isRoleLoading] = useRole();
   const axiosSecure = useAxiosSecure();
-  const { data: stats, isLoading } = useQuery({
+
+  const {
+    data: stats,
+    isLoading: isStatsLoading,
+  } = useQuery({
     queryKey: ['admin-stats'],
     queryFn: async () => {
-      const res = await axiosSecure.get(
-        `/admin/stats`
-      );
+      const res = await axiosSecure.get('/admin/stats');
       return res.data;
     },
-    enabled: !!user?.email,
+    enabled: role === 'admin',
     keepPreviousData: true,
   });
 
-  if (isLoading || isRoleLoading) return <LoadingHash />
+  if (isRoleLoading || (role === 'admin' && isStatsLoading)) return <LoadingHash />;
 
   return (
     <div className="w-full mx-auto px-4 sm:px-8 py-10 text-text">
       <WelcomeBanner />
-      {
-        role === 'admin' &&
-        <StatsCards stats={stats} />
-      }
-      <ProfileInfo />
 
+      {role === 'admin' && <StatsCards stats={stats} />}
+
+      <ProfileInfo />
     </div>
   );
 };
