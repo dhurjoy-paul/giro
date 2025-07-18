@@ -1,16 +1,18 @@
 import CarouselSection from "../../components/CarouselSection"
 import NewsletterSection from "../../components/Newsletter"
-// import OverviewSection from "./OverviewSection"
+import CulturalSnapshots from "./CulturalSnapshots"
+import OverviewSection from "./OverviewSection"
 import TourismSection from "./TourismSection"
-// import VideoFeatureSection from "./VideoFeatureSection"
+import TouristStories from "./TouristStories"
 
 const Home = () => {
   return (
     <>
       <CarouselSection />
+      <OverviewSection />
       <TourismSection />
-      {/* <OverviewSection /> */}
-      {/* <VideoFeatureSection /> */}
+      <TouristStories />
+      <CulturalSnapshots />
       <NewsletterSection />
     </>
   )

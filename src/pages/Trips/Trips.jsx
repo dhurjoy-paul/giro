@@ -26,6 +26,7 @@ const Trips = () => {
     <>
       <div className="h-20 bg-text dark:bg-bg-dark" />
       <div className="max-w-[1400px] mx-auto px-8 xs:px-16 sm:px-10 xl:px-12 py-12 pt-20">
+        <h3 className="font-bricolage-grotesque text-3xl font-semibold mb-6 text-center">All trips are planned for you ({packages?.length})</h3>
         <div className={`flex flex-col gap-6 sm:flex-row sm:flex-wrap sm:justify-center md:grid md:grid-cols-2 lg:grid-cols-3`}>
           {packages.map((trip) => (
             <TripCard key={trip._id} trip={trip} />

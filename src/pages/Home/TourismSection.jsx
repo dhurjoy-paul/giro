@@ -41,8 +41,8 @@ const TourismSection = () => {
   });
 
   const handleTabSelect = (index) => {
-    if (index === 0) refetchPackages(); // Our Packages
-    else if (index === 1) refetchGuides(); // Our Guides
+    if (index === 0) refetchPackages();
+    else if (index === 1) refetchGuides();
   };
 
   if (loadingPackages || loadingGuides) return <LoadingHash />;

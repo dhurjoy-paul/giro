@@ -1,6 +1,7 @@
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Link } from "react-router";
+import Button from "./ui/Button";
 
 // Load images dynamically
 const images = Array.from({ length: 9 }, (_, i) =>
@@ -29,7 +30,7 @@ const CarouselSection = () => {
       </Carousel>
 
       {/* Dark Overlay */}
-      <div className="absolute inset-0 bg-black/60 z-10" />
+      <div className="absolute inset-0 bg-black/40 z-10" />
 
       {/* Center Text */}
       <div className="absolute inset-0 flex items-center justify-center z-20">
@@ -67,12 +68,8 @@ const CarouselSection = () => {
               data-aos="fade-up"
               data-aos-delay="700"
             >
-              <Link to="/community"
-                className="rounded-md px-3.5 py-2.5 text-sm font-semibold text-white shadow-xs bg-brand/90 hover:bg-brand/80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand"
-              >
-                Start Your Journey
-              </Link>
-              <Link to="/trips" className="text-sm/6 font-semibold text-white hover:text-brand">
+              <Button label="Start Your Journey" to="/community" />
+              <Link to="/trips" className="text-lg font-semibold text-white hover:text-brand">
                 Discover Packages<span aria-hidden="true"> →</span>
               </Link>
             </div>
