@@ -1,14 +1,8 @@
-# 📜 GIRO —
+# 🌍 GIRO
 
-<!-- title & description -->
+_"Not just tours. Experiences."_
 
-> ### **Assignment Variant:** `Assignment12_Category_003`
-
----
-
-## 👑 Admin Access
-
-You can log in as an admin using the credentials below:
+Welcome to **GIRO**, a dynamic and modern tourism management platform built to showcase the beauty and culture of Bangladesh. This site empowers tourists, tour guides, and administrators to connect, explore, and manage travel stories and packages with ease.
 
 ### 📧 Email
 
@@ -26,47 +20,48 @@ Asdf1234
 
 #### 🌐 [Visit GIRO live](https://ph-assignment-12-c3db9.web.app)
 
+---
+
+## 🚀 Features
+
+- 🧭 **Responsive Multi-role Dashboard:** Three roles – Tourist, Tour Guide, Admin – each with dedicated dashboards and functionalities.
+- 🎒 **Tour Package Management:** Admin can add/manage packages. Tourists can view, book, and pay via Stripe. Tour guides are assigned based on user selection.
+- 📚 **Tourist Stories Feature:** Tourists and tour guides can write, edit, and delete travel stories with images.
+- 🔐 **JWT Authentication & Role Protection:** Secure route handling using JSON Web Tokens and role-based access.
+- 🔎 **Dynamic Tour Guide & Package Browsing:** Tab-based sections powered by `react-tabs`, with random data fetching using MongoDB `$sample`.
+- 📸 **Gallery with Lightbox:** Each package has a photo gallery showcasing stunning locations using Cloudinary-hosted images.
+- 📅 **Booking System:** Smart booking form with prefilled user data, date picker, and booking status management.
+- 🎉 **Booking Achievement Animation:** Confetti animation for users who book more than 3 trips.
+- 🧠 **State Management:** All data fetching implemented with `@tanstack/react-query` (GET) and protected via interceptors.
+- 🔄 **Edit Stories with Mongo Operators:** Stories can be updated using `$push` and `$pull` to handle image lists.
+- 💬 **Share Stories on Social Media:** Built-in `react-share` support allows users to share stories directly on Facebook.
+- 🎨 **Attractive UI Libraries:** Designed with TailwindCSS, DaisyUI, HeadlessUI, and Framer Motion for beautiful transitions.
+- ⚙️ **Environment Variables:** All sensitive keys (Firebase, MongoDB) are secured using `.env` files.
+- 📱 **Fully Responsive:** Supports mobile, tablet, and desktop views, including a responsive sidebar layout for the dashboard.
+
+---
+
+## 🧩 Tech Stack
+
+- **Frontend:** React, TailwindCSS, DaisyUI, HeadlessUI, React Query, React Router, React Hook Form, Framer Motion
+- **Backend:** Node.js, Express.js, MongoDB, JWT, Stripe
+- **Authentication:** Firebase Email/Password & Google OAuth
+- **Image Storage:** Cloudinary
+- **Packages Used:** React-Datepicker, React-Share, SweetAlert2, TanStack Query, Framer Motion
+
+---
+
 ```
 ph-assignment-12-client
-├─ eslint.config.js
+├─ .firebase
 ├─ index.html
 ├─ package-lock.json
 ├─ package.json
 ├─ public
-│  ├─ default-avatar.png
-│  ├─ favicon.png
-│  ├─ nature-01.jpg
-│  ├─ nature-02.jpg
-│  └─ pattern.png
 ├─ README.md
 ├─ src
 │  ├─ assets
 │  ├─ components
-│  │  ├─ Banner.jsx
-│  │  ├─ CarouselSection.jsx
-│  │  ├─ Footer.jsx
-│  │  ├─ GoogleLogin.jsx
-│  │  ├─ Navbar.jsx
-│  │  ├─ Newsletter.jsx
-│  │  ├─ shared
-│  │  │  ├─ Button.jsx
-│  │  │  ├─ Container.jsx
-│  │  │  ├─ EmptyState.jsx
-│  │  │  ├─ LoadingHash.jsx
-│  │  │  ├─ LoadingSpinner.jsx
-│  │  │  └─ UserImage.jsx
-│  │  └─ ui
-│  │     ├─ Announcement.jsx
-│  │     ├─ AutoEmail.jsx
-│  │     ├─ AutoName.jsx
-│  │     ├─ AutoPwd.jsx
-│  │     ├─ Button.jsx
-│  │     ├─ CloudinaryUploader.jsx
-│  │     ├─ GoTopBtn.jsx
-│  │     ├─ Heading.jsx
-│  │     ├─ MenuItem.jsx
-│  │     ├─ ThemeToggle.jsx
-│  │     └─ UserProfile.jsx
 │  ├─ contexts
 │  │  ├─ AuthProvider.jsx
 │  │  └─ ThemeContext.jsx
@@ -85,46 +80,23 @@ ph-assignment-12-client
 │  ├─ main.jsx
 │  ├─ pages
 │  │  ├─ AboutUs
-│  │  │  └─ AboutUs.jsx
 │  │  ├─ Community
-│  │  │  └─ Community.jsx
 │  │  ├─ dashboard
 │  │  │  ├─ admin
-│  │  │  │  ├─ AddPackages.jsx
-│  │  │  │  ├─ ManageCandidate.jsx
-│  │  │  │  ├─ ManageUsers.jsx
-│  │  │  │  └─ Statistics.jsx
 │  │  │  ├─ common
-│  │  │  │  ├─ AddStory.jsx
-│  │  │  │  ├─ ManageStory.jsx
-│  │  │  │  └─ Profile
-│  │  │  │     ├─ EditProfileModal.jsx
-│  │  │  │     ├─ Profile.jsx
-│  │  │  │     ├─ ProfileInfo.jsx
-│  │  │  │     ├─ WelcomeBanner.jsx
-│  │  │  │     └─ welcomeMessages.js
 │  │  │  ├─ menus
-│  │  │  │  ├─ AdminMenu.jsx
-│  │  │  │  ├─ TourGuideMenu.jsx
-│  │  │  │  └─ TouristMenu.jsx
 │  │  │  ├─ sidebar
-│  │  │  │  ├─ MenuLink.jsx
-│  │  │  │  └─ Sidebar.jsx
 │  │  │  ├─ tourGuide
-│  │  │  │  └─ AssignedTour.jsx
 │  │  │  └─ tourist
-│  │  │     ├─ ApplyGuide.jsx
-│  │  │     └─ MyBookings.jsx
 │  │  ├─ Error
 │  │  │  └─ ErrorPage.jsx
+│  │  ├─ Guide
 │  │  ├─ Home
-│  │  │  └─ Home.jsx
 │  │  ├─ Login
 │  │  │  └─ Login.jsx
 │  │  ├─ SignUp
 │  │  │  └─ SignUp.jsx
 │  │  └─ Trips
-│  │     └─ Trips.jsx
 │  ├─ routes
 │  │  ├─ AdminRoute.jsx
 │  │  ├─ CommonRoute.jsx
@@ -139,3 +111,5 @@ ph-assignment-12-client
 └─ vite.config.js
 
 ```
+
+#### 🖋️ Designed & Developed by [Dhurjoy Paul](https://www.facebook.com/dhurjoy.dev).
