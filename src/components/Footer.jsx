@@ -21,13 +21,10 @@ const socials = [
 
 const Footer = () => {
   return (
-    <footer className="bg-transparent text-text pb-12">
-      <div className='px-10'>
-        <hr className='max-w-7xl mx-auto border-t border-text-muted/30 pt-16' />
-      </div>
+    <footer className="bg-transparent text-text pb-12 border-t border-text-muted/40 pt-16">
+      
 
       <motion.div
-        data-aos="fade-up"
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: 'easeOut' }}
@@ -37,7 +34,7 @@ const Footer = () => {
         <section className='w-full max-w-7xl px-4 md:px-8 mx-auto flex flex-col lg:gap-12 lg:flex-row lg:justify-between lg:items-start'>
 
           {/* Left */}
-          <div className='flex flex-col items-center text-center' data-aos="fade-right" data-aos-delay="400">
+          <div className='flex flex-col items-center text-center'>
             <Heading />
             <p className='mt-4 mb-12 text-lg lg:text-xl text-text-muted font-bricolage-grotesque'>
               <span className='font-semibold text-text'>G</span>o,
@@ -51,7 +48,7 @@ const Footer = () => {
           </div>
 
           {/* Right */}
-          <div data-aos="fade-left" data-aos-delay="400">
+          <div >
             {/* Socials */}
             <div className="flex justify-center gap-6 text-xl mb-4 lg:mt-3 lg:mb-5">
               {socials.map(({ icon, href }, i) => (

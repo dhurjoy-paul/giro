@@ -21,9 +21,10 @@ const TripCard = ({ trip }) => {
           <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-text truncate">
             {trip.title}
           </h3>
-          <p className="font-semibold text-text text-base sm:text-lg">
-            ৳{trip.price}
-            <span className="text-sm font-normal">/trip</span>
+          <p className="font-normal text-text">
+            <span className='font-semibold text-brand/80 group-hover:text-brand text-base sm:text-lg md:text-xl transition-colors duration-300'> ৳{trip.price}</span>
+            <span className="text-sm">/person</span>
+            <span className='text-xs'>/trip</span>
           </p>
         </div>
 

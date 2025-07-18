@@ -3,14 +3,14 @@ import { MdHistoryEdu } from "react-icons/md";
 
 export default function NewsletterSection() {
   return (
-    <div className="bg-transparent py-16 sm:py-24 lg:py-32">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+    <div className="bg-transparent pb-16 sm:pb-24 lg:pb-32 pt-3 sm:pt-5 lg:pt-6">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8 border-t border-text-muted/30 pt-20">
         <div
           className="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-2"
           data-aos="fade-up"
         >
           {/* Left */}
-          <div className="max-w-xl lg:max-w-lg" data-aos="fade-right" data-aos-delay="200">
+          <div className="max-w-xl lg:max-w-lg" data-aos="fade-right" data-aos-delay="100">
             <h2 className="text-4xl font-bricolage-grotesque font-semibold tracking-tight text-text">
               Subscribe to our newsletter
             </h2>
@@ -39,7 +39,7 @@ export default function NewsletterSection() {
 
           {/* Right */}
           <dl className="grid grid-cols-1 gap-x-8 gap-y-10 sm:grid-cols-2 lg:pt-2">
-            <div className="flex flex-col items-start group" data-aos="fade-up" data-aos-delay="200">
+            <div className="flex flex-col items-start group" data-aos="fade-up" data-aos-delay="100">
               <div className="rounded-md bg-text/5 p-2 ring-1 ring-text/10 group-hover:bg-brand/8 group-hover:ring-brand/10">
                 <MdHistoryEdu className="size-6 text-text group-hover:text-brand" />
               </div>
@@ -48,7 +48,7 @@ export default function NewsletterSection() {
                 Discover breathtaking destinations and stories shared by real tourists and guides.
               </dd>
             </div>
-            <div className="flex flex-col items-start group" data-aos="fade-up" data-aos-delay="200">
+            <div className="flex flex-col items-start group" data-aos="fade-up" data-aos-delay="100">
               <div className="rounded-md bg-text/5 p-2 ring-1 ring-text/10 group-hover:bg-brand/8 group-hover:ring-brand/10">
                 <HiOutlineHandRaised className="size-6 text-text group-hover:text-brand" />
               </div>
