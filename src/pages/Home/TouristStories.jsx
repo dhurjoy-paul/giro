@@ -1,6 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { Link } from "react-router";
 import LoadingHash from "../../components/shared/LoadingHash";
 import Button from "../../components/ui/Button";
 import StoryCard from "./StoryCard";
@@ -21,7 +20,6 @@ const TouristStories = () => {
     queryFn: fetchStories,
   });
 
-  console.log(stories)
   if (isLoading) return <LoadingHash />
 
   return (
@@ -46,9 +44,7 @@ const TouristStories = () => {
 
 
         <div className="text-center mt-10">
-          <Link to="/community">
-            <Button label="Read More Stories" to="/community" />
-          </Link>
+          <Button label="Read More Stories" to="/community" />
         </div>
       </div>
     </section>

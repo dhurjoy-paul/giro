@@ -19,20 +19,20 @@ const ErrorPage = () => {
 
   return (
     <ThemeProvider>
-      <div className="min-h-screen flex flex-col items-center justify-center bg-menu/0 dark:bg-[#07142F] text-text text-center p-4">
+      <div className="min-h-screen flex flex-col items-center justify-center bg-[#07142F] text-text text-center p-4">
         <Navbar />
         <div className="w-full max-w-md">
           <Lottie animationData={notFoundAnimation} loop={true} />
         </div>
-        <h1 className="text-3xl md:text-4xl font-bold text-gray-800 dark:text-white mt-4">
+        <h1 className="text-3xl md:text-4xl font-bold text-white mt-4">
           Oops! Page Not Found
         </h1>
-        <p className="text-gray-600 dark:text-gray-300 mt-2 mb-6">
+        <p className="text-gray-300 mt-2 mb-6">
           The page you’re looking for doesn’t exist or has been moved.
         </p>
         <Link
           to="/"
-          className="inline-block px-6 py-2 text-white bg-brand hover:bg-brand rounded-lg shadow-md transition"
+          className="inline-block px-6 py-2 text-white bg-blue-600 hover:bg-blue-700 rounded-lg shadow-md transition"
         >
           Back to Home
         </Link>

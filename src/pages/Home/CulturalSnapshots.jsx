@@ -30,7 +30,7 @@ const cards = [
   },
   {
     url: "https://res.cloudinary.com/dnxdrwrom/image/upload/v1752848853/joy_yryew2.jpg",
-    title: "Happiness",
+    title: "Joy",
     category: "Happiness",
     id: 5,
   },

@@ -1,18 +1,23 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
 import { FaFacebookF, FaShareSquare } from "react-icons/fa";
-import { useNavigate } from "react-router";
+import { useNavigate, useLocation } from "react-router";
 import { FacebookShareButton } from "react-share";
 import useAuth from "../../hooks/useAuth";
+import LoadingHash from "../../components/shared/LoadingHash";
 
 const StoryCard = ({ story }) => {
-  const { user } = useAuth();
+  const { user, loading: authLoading } = useAuth();
+  const location = useLocation();
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleShare = () => {
+  if (authLoading) return <LoadingHash />;
+
+  const handleShare = (e) => {
     if (!user) {
-      navigate("/login");
+      e.preventDefault();
+      navigate("/auth/login", { state: { from: location }, replace: true });
     }
   };
 
@@ -38,7 +43,9 @@ const StoryCard = ({ story }) => {
           {formatStoryDate(story.createdAt)}
         </p>
 
-        <h3 className="text-lg font-semibold text-foreground group-hover:text-brand">{story.title}</h3>
+        <h3 className="text-lg font-semibold text-foreground group-hover:text-brand">
+          {story.title}
+        </h3>
         <p className="text-muted text-sm mt-1 line-clamp-3">{story.content}</p>
 
         <button
@@ -58,18 +65,30 @@ const StoryCard = ({ story }) => {
             <p className="text-base font-medium">{story.author_name}</p>
           </div>
 
-          <FacebookShareButton
-            url={`https://ph-assignment-12-c3db9.web.app/trips`}
-            quote={story.title}
-            hashtag="#GiroTravel"
-            onClick={handleShare}
-            className="flex items-center gap-2"
-          >
-            <FaShareSquare size={24} title="Share on Facebook" className="group-hover:fill-brand" />
-            <p className="p-1 rounded-full bg-blue-600 text-white hover:bg-blue-700 transition">
-              <FaFacebookF size={26} className="group-hover:scale-90" />
-            </p>
-          </FacebookShareButton>
+          {user ? (
+            <FacebookShareButton
+              url={`https://ph-assignment-12-c3db9.web.app/community`}
+              quote={story.title}
+              hashtag="#GiroTravel"
+              className="flex items-center gap-2"
+            >
+              <FaShareSquare size={24} title="Share on Facebook" className="group-hover:fill-brand" />
+              <p className="p-1 rounded-full bg-blue-600 text-white hover:bg-blue-700 transition">
+                <FaFacebookF size={26} className="group-hover:scale-90" />
+              </p>
+            </FacebookShareButton>
+          ) : (
+            <button
+              onClick={() => navigate("/auth/login", { state: { from: { pathname: "/community" } }, replace: true })}
+              className="flex items-center gap-2"
+            >
+              <FaShareSquare size={24} title="Share on Facebook" className="group-hover:fill-brand" />
+              <p className="p-1 rounded-full bg-blue-600 text-white hover:bg-blue-700 transition">
+                <FaFacebookF size={26} className="group-hover:scale-90" />
+              </p>
+            </button>
+          )}
+
         </div>
       </div>
 

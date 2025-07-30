@@ -42,7 +42,7 @@ const AboutUs = () => {
       tech: ["React", "Tailwind", "Firebase"],
     },
     {
-      title: "Online Doctor Appointment Booking System (Payra)",
+      title: "Online Doctor Appointment Booking System (Phudu)",
       description: "A platform that helps to book appointment of doctors and get information about doctors.",
       live: "https://dpn-ph-assign-08.surge.sh",
       image: "/phudu.png",
@@ -57,7 +57,6 @@ const AboutUs = () => {
     },
 
   ];
-
 
   return (
     <>

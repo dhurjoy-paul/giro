@@ -2,14 +2,14 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 import axios from "axios";
 import { getAuth, sendPasswordResetEmail } from "firebase/auth";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { HiOutlineEye, HiOutlineEyeOff, HiOutlineKey, HiOutlineLogin, HiOutlineMail } from "react-icons/hi";
 import { Link, useLocation, useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import GoogleLogin from "../../components/GoogleLogin";
 import Heading from "../../components/ui/Heading";
-import { AuthContext } from "../../contexts/AuthProvider";
 import { app } from "../../firebase/firebase.config";
+import useAuth from "../../hooks/useAuth";
 import { saveUserInDb } from "../../utils/saveUserInDb";
 
 const Login = () => {
@@ -18,7 +18,7 @@ const Login = () => {
   }, [])
 
   const auth = getAuth(app)
-  const { signIn } = useContext(AuthContext)
+  const { signIn } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const [showPassword, setShowPassword] = useState(false);
