@@ -35,6 +35,9 @@
 @theme {
   --breakpoint-xs: 30rem;
   --breakpoint-auth: 55rem;
+  --breakpoint-nav: 58rem;
+  --breakpoint-last: 84rem;
+
   /* Fonts */
   --font-epilogue: "Epilogue", sans-serif;
   --font-albert-sans: "Albert Sans", sans-serif;

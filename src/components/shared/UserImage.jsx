@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 
-const UserImage = ({ isAtTop = false, size = "sm", dashboard = false }) => {
+const UserImage = ({ isAtTop = false, size = "sm", dashboard = false, className = '' }) => {
   const { user } = useAuth();
   const axiosSecure = useAxiosSecure();
 
@@ -35,6 +35,7 @@ const UserImage = ({ isAtTop = false, size = "sm", dashboard = false }) => {
 
   const avatarWrapperClass = clsx(
     'flex items-center justify-center font-semibold overflow-hidden',
+    className,
     avatarSizeClass,
     roundClass,
     !hasPhoto && initialsClass

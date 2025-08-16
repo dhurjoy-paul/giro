@@ -2,23 +2,11 @@ import { Popover, PopoverButton, PopoverPanel, Transition } from '@headlessui/re
 import { Fragment } from 'react';
 import { FaChevronDown } from 'react-icons/fa6';
 import { HiOutlineLogout } from 'react-icons/hi';
-import { LuLayoutDashboard } from "react-icons/lu";
-import { NavLink } from 'react-router';
 import useAuth from '../../hooks/useAuth';
 import UserImage from '../shared/UserImage';
 
 const UserProfile = ({ isAtTop }) => {
   const { user, logOut } = useAuth()
-  const hasPhoto = !!user?.photoURL;
-
-  // Get initials from displayName
-  const initials = user?.displayName
-    ? user.displayName.split(' ').map(part => part[0]).join('').slice(0, 2).toUpperCase()
-    : 'U';
-
-  // Determine styling for avatar container
-  const avatarWrapperClass = `rounded-full size-8 flex items-center justify-center font-semibold overflow-hidden ${user && !hasPhoto ? 'bg-[#0d0d0d] text-white' : ''
-    } ${isAtTop ? '' : 'bg-background text-black'}`;
 
   return (
     <Popover className="relative z-50">
@@ -27,7 +15,9 @@ const UserProfile = ({ isAtTop }) => {
         className={`inline-flex items-center gap-x-2 rounded-full px-[6px] py-1 font-bold focus:outline-none ${isAtTop ? 'bg-[#f2f2f2] text-[#f2f2f2]' : 'bg-text text-text'
           }`}
       >
-        <UserImage isAtTop={isAtTop} />
+        <UserImage size="sm" isAtTop={isAtTop} className="block lg:hidden" />
+        <UserImage size="lg" isAtTop={isAtTop} className="hidden lg:block" />
+
         <div className={`${isAtTop ? 'text-black' : 'text-bg-dark'} pr-2`}>
           <FaChevronDown />
         </div>
@@ -44,18 +34,8 @@ const UserProfile = ({ isAtTop }) => {
       >
         <PopoverPanel className="absolute right-0 mt-3 w-fit origin-top-right rounded-xl pb-2 bg-background shadow-xl ring-1 ring-text/20 focus:outline-none">
           <div className="p-4 border-b border-dashed border-gray-100 dark:border-gray-700">
-            <p className="text-lg font-bold text-text">{user?.displayName}</p>
+            <p className="text-lg font-bold text-text whitespace-nowrap">{user?.displayName}</p>
             <p className="text-base font-medium text-text-muted">{user?.email}</p>
-          </div>
-
-          <div className="px-4 py-2">
-            <NavLink
-              to="/dashboard"
-              className="w-full flex items-center gap-2 rounded-lg px-3 py-2 text-lg font-semibold text-text dark:bg-zinc-700 bg-bg-light hover:bg-bg-dark dark:hover:bg-zinc-800"
-            >
-              <LuLayoutDashboard size={22} />
-              <span>Dashboard</span>
-            </NavLink>
           </div>
 
           <div className="border-t border-dashed border-gray-200 dark:border-gray-600" />

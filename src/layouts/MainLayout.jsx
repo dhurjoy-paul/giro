@@ -52,7 +52,7 @@ const MainLayout = () => {
         <Navbar />
         <Outlet />
 
-        <section className="fixed bottom-4 right-0 -translate-x-1/2 z-500 flex flex-col items-center space-y-2">
+        <section className="fixed bottom-4 right-0 -translate-x-1/2 z-9999 flex flex-col items-center space-y-2">
           <GoTopBtn />
           <ThemeToggle />
         </section>

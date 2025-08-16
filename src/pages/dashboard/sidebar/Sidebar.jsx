@@ -1,4 +1,3 @@
-// src/components/ui/DashboardSidebar.jsx
 import { Dialog, Transition } from '@headlessui/react';
 import { Fragment } from 'react';
 import { HiOutlineLogout, HiX } from 'react-icons/hi';

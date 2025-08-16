@@ -1,12 +1,11 @@
-import { Dialog, DialogPanel } from '@headlessui/react';
 import { motion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
-import { FaBars, FaCircleInfo, FaPaperPlane, FaXmark } from "react-icons/fa6";
-import { HiHome, HiOutlineLogin } from "react-icons/hi";
-import { RiUserCommunityFill } from "react-icons/ri";
-import { NavLink } from 'react-router';
+import { FaBars } from "react-icons/fa6";
+import { HiOutlineLogin } from "react-icons/hi";
 import useAuth from '../hooks/useAuth';
 import useNavbarBehavior from '../hooks/useNavbarBehavior';
+import MobileMenu from './shared/MobileMenu';
+import SimpleDropdown from './shared/SimpleDropdown';
 import Announcement from './ui/Announcement';
 import Button from './ui/Button';
 import Heading from './ui/Heading';
@@ -14,10 +13,10 @@ import MenuItem from './ui/MenuItem';
 import UserProfile from './ui/UserProfile';
 
 const menuItems = [
-  { name: 'Home', to: '/', icon: <HiHome size={27} /> },
-  { name: 'Trips', to: '/trips', icon: <FaPaperPlane /> },
-  { name: 'Community', to: '/community', icon: <RiUserCommunityFill size={26} /> },
-  { name: 'About Us', to: '/about-us', icon: <FaCircleInfo size={24} /> }
+  { name: 'Home', to: '/' },
+  { name: 'Trips', to: '/trips' },
+  { name: 'Community', to: '/community' },
+  { name: 'About Us', to: '/about-us' }
 ]
 
 export default function Navbar() {
@@ -60,11 +59,12 @@ export default function Navbar() {
           <Announcement setShowAnnouncement={setShowAnnouncement} />
         </section>
       )}
+
       <motion.header
         initial={{ y: 0 }}
         animate={{ y: isNavbarVisible ? 0 : '-100%' }}
         transition={{ duration: 0.3, ease: 'easeInOut' }}
-        className={`fixed w-full z-40 transition-all duration-300 ease-in-out
+        className={`fixed w-full z-40 transition-all
     ${isAtTop ? 'bg-transparent text-white' : 'bg-menu text-text'}
   `}
         style={{
@@ -73,72 +73,54 @@ export default function Navbar() {
           WebkitBackdropFilter: 'blur(10px)',
         }}
       >
-
-        <nav className="mx-auto max-w-7xl px-6 py-4 md:px-8 flex items-center justify-between">
+        <nav className="w-full mx-auto px-6 md:px-8 last:px-0 py-3 lg:py-2 flex items-center justify-between">
           {/* Logo */}
           <Heading isAtTop={isAtTop} />
 
           {/* Centered nav menu */}
-          <div className="hidden md:flex absolute md:text-lg left-1/2 -translate-x-1/2 md:gap-x-6 lg:gap-x-12">
+          <div className="hidden nav:flex nav:justify-between nav:items-center nav:text-xl lg:text-[22px] xl:text-2xl nav:gap-x-6 lg:gap-x-8 xl:gap-x-12">
             {menuItems.map((menuItem, i) => (
               <MenuItem key={i} label={menuItem.name} to={menuItem.to} isAtTop={isAtTop} />
             ))}
+            {user && <SimpleDropdown isAtTop={isAtTop} />}
           </div>
 
           {/* Right Section */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-5 sm:gap-6 md:gap-7">
             {
               user
                 ? (<UserProfile isAtTop={isAtTop} />)
                 : isAtTop
-                  ? (<Button label="Login" to="/auth/login" isAtTop={isAtTop} icon={<HiOutlineLogin size={22} />} />)
-                  : (<Button label="Login" to="/auth/login" icon={<HiOutlineLogin size={22} />} />)
+                  ? <>
+                    <Button size='sm' label="Login" to="/auth/login" isAtTop={isAtTop} icon={<HiOutlineLogin size={22} />} control='inline-block lg:hidden' />
+                    <Button size='md' label="Login" to="/auth/login" isAtTop={isAtTop} icon={<HiOutlineLogin size={22} />} control='hidden lg:inline-block' />
+                  </>
+                  : <>
+                    <Button size='sm' label="Login" to="/auth/login" icon={<HiOutlineLogin size={22} />} control='inline-block lg:hidden' />
+                    <Button size='md' label="Login" to="/auth/login" icon={<HiOutlineLogin size={22} />} control='hidden lg:inline-block' />
+                  </>
             }
 
-            {/* Mobile menu button */}
-            <div className="md:hidden flex items-center">
+            {/* mobile menu button */}
+            <div className="nav:hidden flex items-center group">
               <button
                 type="button"
                 onClick={() => setMobileMenuOpen(true)}
-                className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-text"
+                className={`-m-2.5 inline-flex items-center justify-center rounded-md p-2.5  group-hover:cursor-pointer
+                  ${isAtTop ? 'text-white' : 'text-text'} `}
               >
                 <span className="sr-only">Open main menu</span>
-                <FaBars size={24} />
+                <FaBars className='size-7.5 md:size-8' />
               </button>
             </div>
           </div>
         </nav>
 
         {/* Mobile menu */}
-        <Dialog open={mobileMenuOpen} onClose={setMobileMenuOpen} className="md:hidden">
-          <div className="fixed inset-0 z-50" />
-          <DialogPanel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-[var(--color-background)] dark:bg-[var(--color-menu)] p-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10 dark:sm:ring-white/10">
-            <div className="flex items-center justify-between">
-              <Heading />
-              <button type="button"
-                onClick={() => setMobileMenuOpen(false)}
-                className="-m-2.5 rounded-md p-2.5 text-[var(--color-text)] dark:text-[var(--color-text)]"
-              >
-                <span className="sr-only">Close menu</span>
-                <FaXmark aria-hidden="true" size={28} className='cursor-pointer' />
-              </button>
-            </div>
-
-            <div className="flow-root mt-12">
-              <div className="-my-6 divide-y divide-gray-500/10 dark:divide-gray-500/20">
-                <div className="space-y-2 py-6">
-                  {menuItems.map((item, i) => (
-                    <NavLink key={i} to={item.to} onClick={() => setMobileMenuOpen(false)}
-                      className="mx-1 flex items-center gap-5 rounded-lg px-8 py-3 text-xl font-bold text-text hover:bg-bg-light dark:text-text dark:hover:bg-bg-dark group"
-                    >{item?.icon && <span className='group-hover:text-brand' aria-hidden="true">{item?.icon}</span>}
-                      <span>{item?.name}</span>
-                    </NavLink>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </DialogPanel>
-        </Dialog>
+        <MobileMenu
+          open={mobileMenuOpen}
+          setOpen={setMobileMenuOpen}
+        />
       </motion.header>
     </>
   )
