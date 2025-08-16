@@ -1,5 +1,18 @@
 {
   "projects": {
     "default": "ph-assignment-12-c3db9"
-  }
+  },
+  "targets": {
+    "ph-assignment-12-c3db9": {
+      "hosting": {
+        "app_giro_live": [
+          "giro-live"
+        ],
+        "old_url_redirect": [
+          "ph-assignment-12-c3db9"
+        ]
+      }
+    }
+  },
+  "etags": {}
 }

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Redirecting | Giro</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Epilogue:wght@400;600&display=swap');
+
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Epilogue', sans-serif;
+      background: #f9f9f9;
+      color: #111;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      font-size: 1rem;
+      opacity: 0.7;
+    }
+
+    .spinner {
+      margin: 2rem auto;
+      width: 40px;
+      height: 40px;
+      border: 3px solid rgba(0, 0, 0, 0.1);
+      border-top: 3px solid #111;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    a {
+      display: inline-block;
+      margin-top: 1rem;
+      font-weight: 500;
+      color: #111;
+      text-decoration: underline;
+      transition: opacity 0.2s ease;
+    }
+
+    a:hover {
+      opacity: 0.6;
+    }
+  </style>
+  <script>
+    setTimeout(() => {
+      window.location.href = "https://giro-live.web.app";
+    }, 6000);
+  </script>
+</head>
+
+<body>
+  <div>
+    <div class="spinner"></div>
+    <h1>Redirecting to Giro...</h1>
+    <p>You’ll be taken to our live site shortly.</p>
+    <a href="https://giro-live.web.app">Go now</a>
+  </div>
+</body>
+
+</html>

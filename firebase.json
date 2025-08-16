@@ -1,16 +1,26 @@
 {
-  "hosting": {
-    "public": "dist",
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ],
-    "rewrites": [
-      {
-        "source": "**",
-        "destination": "/index.html"
-      }
-    ]
-  }
+  "hosting": [
+    {
+      "site": "giro-live",
+      "public": "dist",
+      "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    },
+    {
+      "site": "ph-assignment-12-c3db9",
+      "public": "redirect-placeholder",
+      "redirects": [
+        {
+          "source": "/**",
+          "destination": "https://giro-live.web.app/:splat",
+          "type": 301
+        }
+      ]
+    }
+  ]
 }

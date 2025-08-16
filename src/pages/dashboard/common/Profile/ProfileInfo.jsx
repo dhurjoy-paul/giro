@@ -41,7 +41,6 @@ const ProfileInfo = () => {
     <section className="w-fit mx-auto px-4 sm:px-8 py-8 flex justify-center">
       <div className="glass-card w-full max-w-6xl rounded-2xl p-6 sm:p-12 md:p-18 lg:p-20 flex flex-col md:flex-row items-center gap-8 md:gap-12 transition-all duration-300 border border-border relative overflow-hidden">
 
-
         {/* Left Column */}
         <div className="flex flex-col items-center text-center md:text-left relative">
           <div className="relative group">
