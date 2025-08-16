@@ -14,11 +14,10 @@
     {
       "site": "ph-assignment-12-c3db9",
       "public": "redirect-placeholder",
-      "redirects": [
+      "rewrites": [
         {
-          "source": "/**",
-          "destination": "https://giro-live.web.app/:splat",
-          "type": 301
+          "source": "**",
+          "destination": "/index.html"
         }
       ]
     }
