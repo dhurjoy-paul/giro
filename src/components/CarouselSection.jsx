@@ -3,15 +3,13 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Link } from "react-router";
 import Button from "./ui/Button";
 
-// Load images dynamically
 const images = Array.from({ length: 9 }, (_, i) =>
   new URL(`../assets/bg-0${i + 1}.jpg`, import.meta.url).href
 );
-
 const CarouselSection = () => {
   return (
     <div className="relative">
-      {/* Carousel */}
+
       <Carousel
         showArrows={false}
         autoPlay={true}
@@ -29,12 +27,10 @@ const CarouselSection = () => {
         ))}
       </Carousel>
 
-      {/* Dark Overlay */}
       <div className="absolute inset-0 bg-black/40 z-10" />
 
-      {/* Center Text */}
       <div className="absolute inset-0 flex items-center justify-center z-20">
-        <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56"
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8"
           data-aos="fade-up"
         >
           <div className="hidden sm:mb-8 sm:flex sm:justify-center" data-aos="zoom-in" data-aos-delay="200">
@@ -49,22 +45,23 @@ const CarouselSection = () => {
           </div>
           <div className="text-center">
             <h1
-              className="text-5xl font-semibold font-bricolage-grotesque tracking-tight text-balance text-white sm:text-7xl"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold font-bricolage-grotesque tracking-tight text-white "
               data-aos="fade-up"
               data-aos-delay="300"
             >
-              Explore Bangladesh like Never Before
+              <span className="block">Explore Bangladesh</span>
+              <span className="block">Like Never Before</span>
             </h1>
             <p
-              className="mt-8 text-lg font-medium text-pretty text-white/90 sm:text-xl/8"
+              className="mt-6 sm:mt-8 text-lg sm:text-xl font-medium text-pretty text-white/90"
               data-aos="fade-up"
               data-aos-delay="500"
             >
               Your journey starts here — from Sundarbans to Sylhet,
-              <br /> we guide your way.
+              <br className="hidden sm:block" /> we guide your way.
             </p>
             <div
-              className="mt-10 flex items-center justify-center gap-x-6"
+              className="mt-8 sm:mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-x-6"
               data-aos="fade-up"
               data-aos-delay="700"
             >
@@ -79,5 +76,4 @@ const CarouselSection = () => {
     </div>
   );
 };
-
 export default CarouselSection;
