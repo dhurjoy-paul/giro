@@ -9,41 +9,38 @@ const axiosPublic = axios.create({
 });
 
 const fetchStories = async () => {
-  const res = await axiosPublic.get('/stories/random/4');
+  const res = await axiosPublic.get('/stories/random/5');
   return res.data;
 };
 
 const TouristStories = () => {
-
   const { data: stories = [], isLoading } = useQuery({
     queryKey: ['randomStories'],
     queryFn: fetchStories,
   });
 
-  if (isLoading) return <LoadingHash />
+  if (isLoading) return <LoadingHash />;
 
   return (
-    <section className="w-full py-16 px-4 md:px-10 lg:px-20 bg-transparent text-foreground">
-      <div className="max-w-7xl mx-auto">
+    <section className="py-12 sm:py-16 lg:py-20 bg-transparent text-foreground">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Heading */}
-        <div className="text-center mb-10">
-          <h2 className="text-3xl md:text-4xl font-bold mb-2 font-bricolage-grotesque">
+        <div className="text-center mb-8 sm:mb-10 lg:mb-12">
+          <h2 className="text-3xl sm:text-4xl font-bold mb-2 font-bricolage-grotesque">
             Tourist Stories
           </h2>
-          <p className="text-lg text-muted max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg text-muted max-w-2xl mx-auto">
             Real journeys shared by our explorers — dive into experiences from every corner of Bangladesh.
           </p>
         </div>
 
-        {/* Story Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {
-            stories.map((story) => <StoryCard key={story._id} story={story} />)
-          }
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-5 lg:gap-6">
+          {stories.map((story) => (
+            <StoryCard key={story._id} story={story} />
+          ))}
         </div>
 
-
-        <div className="text-center mt-10">
+        <div className="text-center mt-8 sm:mt-10 lg:mt-12">
           <Button label="Read More Stories" to="/community" />
         </div>
       </div>
