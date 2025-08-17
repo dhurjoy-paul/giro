@@ -1,195 +1,381 @@
-import AOS from "aos";
-import "aos/dist/aos.css";
-import { motion } from "framer-motion";
-import { useEffect } from "react";
-import { FaFacebookSquare, FaGithub, FaNodeJs, FaReact } from "react-icons/fa";
-import { SiCss3, SiDaisyui, SiExpress, SiFirebase, SiHeadlessui, SiHtml5, SiJavascript, SiMongodb, SiTailwindcss } from "react-icons/si";
-
+import { motion } from 'framer-motion';
+import { FiGlobe, FiHeart, FiMapPin, FiStar, FiUsers } from 'react-icons/fi';
+import { Link } from 'react-router';
 
 const AboutUs = () => {
-  useEffect(() => {
-    AOS.init({ duration: 1000 });
-  }, []);
+  // Team members data
+  const teamMembers = [
+    {
+      name: "Sarah Johnson",
+      role: "Founder & CEO",
+      image: "https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+      bio: "Passionate traveler with 15+ years of experience in sustainable tourism."
+    },
+    {
+      name: "Michael Chen",
+      role: "Head of Operations",
+      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+      bio: "Expert in creating seamless travel experiences across Bangladesh."
+    },
+    {
+      name: "Amina Rahman",
+      role: "Lead Tour Guide",
+      image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+      bio: "Local expert with deep knowledge of Bangladesh's hidden gems."
+    },
+    {
+      name: "David Wilson",
+      role: "Marketing Director",
+      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80",
+      bio: "Bringing Bangladesh's beauty to the world through innovative marketing."
+    }
+  ];
 
-  const projects = [
+  // Values data
+  const values = [
     {
-      title: "Tourism Management System (GIRO)",
-      description: "A full-featured tourism booking web app built with the MERN stack and Firebase.",
-      live: "https://ph-assignment-12-c3db9.web.app",
-      image: "/giro.png",
-      tech: ["React", "Tailwind", "Firebase", "MongoDB", "JWT", "Express"],
+      icon: <FiHeart className="text-2xl" />,
+      title: "Passion for Travel",
+      description: "We live and breathe travel, creating experiences that ignite wanderlust."
     },
     {
-      title: "Service Sharing Platform (Servora)",
-      description: "A platform to share and book custom services, with authentication.",
-      live: false,
-      image: "/servora.png",
-      tech: ["React", "Express", "JWT", "MongoDB"],
-      working: true
+      icon: <FiMapPin className="text-2xl" />,
+      title: "Local Expertise",
+      description: "Our guides are locals who know Bangladesh like the back of their hand."
     },
     {
-      title: "A massive recipe collection (Recipea)",
-      description: "This site helps people to find recipes, add recipes also can save as bookmark favorite recipes",
-      live: "https://ph-assignment-10-33664.web.app",
-      image: "/recipea.png",
-      tech: ["React", "Express", "JWT", "MongoDB", "Firebase"],
+      icon: <FiUsers className="text-2xl" />,
+      title: "Community Focus",
+      description: "We support local communities and promote responsible tourism."
     },
     {
-      title: "Online Payment Site (Payra)",
-      description: "A platform to pay utility bills such education, electricity etc.",
-      live: "https://ph-assignment-09-fedf7.web.app",
-      image: "/payra.png",
-      tech: ["React", "Tailwind", "Firebase"],
-    },
-    {
-      title: "Online Doctor Appointment Booking System (Phudu)",
-      description: "A platform that helps to book appointment of doctors and get information about doctors.",
-      live: "https://dpn-ph-assign-08.surge.sh",
-      image: "/phudu.png",
-      tech: ["React", "Tailwind", "DaisyUI"],
-    },
-    {
-      title: "Online Bid System (Auction Gallery)",
-      description: "From this anyone can bid on products, can place favorite",
-      live: "https://dpn-ph-assign-07.surge.sh",
-      image: "/auctionGallery.png",
-      tech: ["React", "Tailwind", "DaisyUI"],
-    },
+      icon: <FiGlobe className="text-2xl" />,
+      title: "Sustainability",
+      description: "Committed to preserving Bangladesh's natural beauty for future generations."
+    }
+  ];
 
+  // Stats data
+  const stats = [
+    { value: "50K+", label: "Happy Travelers" },
+    { value: "25+", label: "Destinations" },
+    { value: "15+", label: "Years Experience" },
+    { value: "4.8/5", label: "Average Rating" }
   ];
 
   return (
-    <>
+    <div className="min-h-screen">
       <div className="h-20 bg-text dark:bg-bg-dark" />
-      <div className="max-w-7xl mx-auto px-4 py-10 text-foreground pt-32">
-        {/* Dev Info */}
-        <div className="glass-card px-10 pl-16 py-16 w-fit mx-auto flex flex-col md:flex-row items-center gap-6">
-          <img
-            src="https://res.cloudinary.com/dnxdrwrom/image/upload/v1752841595/IMG_20241214_091952709_HDR_PORTRAIT_kiimmv.jpg"
-            alt="Developer"
-            className="w-40 h-40 rounded-full block border-4 border-brand object-cover shadow-lg"
-          />
-          <div className="w-fit space-y-5 ml-4">
-            <h2 className="text-3xl font-bold text-center md:text-left">Hi, I’m <span className="font-bricolage-grotesque">DHURJOY PAUL</span></h2>
-            <p className="mt-2 text-muted max-w-xl text-center md:text-left">
-              A developer focused on MERN and Firebase-powered web apps. I love building smooth UIs, scalable APIs, and creating rich user experiences.
-            </p>
+      {/* Hero Section */}
+      <section className="relative  py-20 sm:py-24 lg:py-32">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl mx-auto text-center">
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-semibold font-bricolage-grotesque tracking-tight text-text mb-6"
+              data-aos="fade-up"
+              data-aos-delay="300"
+            >
+              <span className="block">Discover Bangladesh</span>
+              <span className="block">With Us</span>
+            </motion.h1>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="text-lg sm:text-xl text-text-muted max-w-2xl mx-auto"
+            >
+              We're not just a travel company; we're storytellers, adventure creators, and your gateway to the heart of Bangladesh.
+            </motion.p>
+          </div>
+        </div>
+      </section>
 
-            <div className="mt-4 flex gap-4 w-fit mx-auto md:mx-0">
-              <a href="https://github.com/dhurjoy-paul" target="_blank" rel="noreferrer">
-                <FaGithub size={28} className="hover:text-brand" />
-              </a>
-              <a href="https://www.facebook.com/dhurjoy.dev" target="_blank" rel="noreferrer">
-                <FaFacebookSquare size={28} className="hover:text-brand" />
-              </a>
+      {/* Mission & Vision */}
+      <section className="py-16 sm:py-20 lg:py-24 bg-white dark:bg-zinc-900">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5 }}
+              viewport={{ once: true }}
+            >
+              <div className="mb-6">
+                <div className="w-12 h-1 bg-emerald-500 rounded-full mb-4"></div>
+                <h2 className="text-3xl sm:text-4xl font-bold font-bricolage-grotesque text-text mb-4">
+                  Our Mission
+                </h2>
+              </div>
+              <p className="text-lg text-text-muted mb-4">
+                To create unforgettable travel experiences that connect people with the rich culture, stunning landscapes, and warm hospitality of Bangladesh.
+              </p>
+              <p className="text-lg text-text-muted">
+                We believe travel should be transformative, not just transactional. Every journey we craft is designed to leave a positive impact on both travelers and local communities.
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5 }}
+              viewport={{ once: true }}
+            >
+              <div className="mb-6">
+                <div className="w-12 h-1 bg-blue-500 rounded-full mb-4"></div>
+                <h2 className="text-3xl sm:text-4xl font-bold font-bricolage-grotesque text-text mb-4">
+                  Our Vision
+                </h2>
+              </div>
+              <p className="text-lg text-text-muted mb-4">
+                To be Bangladesh's most trusted and innovative travel company, setting new standards for sustainable and authentic tourism.
+              </p>
+              <p className="text-lg text-text-muted">
+                We envision a future where tourism in Bangladesh thrives in harmony with nature and culture, creating meaningful connections that last a lifetime.
+              </p>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Our Story */}
+      <section className="py-16 sm:py-20 lg:py-24 bg-zinc-50 dark:bg-zinc-800">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl sm:text-4xl font-bold font-bricolage-grotesque text-text mb-4">
+                Our Story
+              </h2>
+              <div className="w-20 h-1 bg-emerald-500 rounded-full mx-auto"></div>
+            </div>
+
+            <div className="space-y-8">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                viewport={{ once: true }}
+                className="flex flex-col md:flex-row gap-8 items-center"
+              >
+                <div className="md:w-1/3">
+                  <div className="aspect-square rounded-2xl overflow-hidden shadow-lg">
+                    <img
+                      src="https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                      alt="Our beginning"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                </div>
+                <div className="md:w-2/3">
+                  <h3 className="text-2xl font-bold text-text mb-4 font-bricolage-grotesque">The Beginning</h3>
+                  <p className="text-lg text-text-muted">
+                    It all started in 2008 when our founder, Sarah Johnson, fell in love with Bangladesh during a backpacking trip. She was captivated by the warmth of the people, the diversity of landscapes, and the richness of culture that few travelers get to experience.
+                  </p>
+                </div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                viewport={{ once: true }}
+                className="flex flex-col md:flex-row-reverse gap-8 items-center"
+              >
+                <div className="md:w-1/3">
+                  <div className="aspect-square rounded-2xl overflow-hidden shadow-lg">
+                    <img
+                      src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                      alt="Growth"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                </div>
+                <div className="md:w-2/3">
+                  <h3 className="text-2xl font-bold text-text mb-4 font-bricolage-grotesque">Growth & Evolution</h3>
+                  <p className="text-lg text-text-muted">
+                    What began as a small operation with just two guides has grown into a team of passionate travel experts. We've expanded our offerings, refined our processes, but never lost sight of what matters most: creating authentic, responsible travel experiences.
+                  </p>
+                </div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                viewport={{ once: true }}
+                className="flex flex-col md:flex-row gap-8 items-center"
+              >
+                <div className="md:w-1/3">
+                  <div className="aspect-square rounded-2xl overflow-hidden shadow-lg">
+                    <img
+                      src="https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                      alt="Today"
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                </div>
+                <div className="md:w-2/3">
+                  <h3 className="text-2xl font-bold text-text mb-4 font-bricolage-grotesque">Today & Tomorrow</h3>
+                  <p className="text-lg text-text-muted">
+                    Today, we're proud to be Bangladesh's leading travel company, known for our innovative itineraries, exceptional service, and commitment to sustainability. As we look to the future, we're excited to continue exploring new ways to showcase the beauty of Bangladesh while preserving it for generations to come.
+                  </p>
+                </div>
+              </motion.div>
             </div>
           </div>
-
         </div>
+      </section>
 
-        {/* Skills */}
-        <div className="mt-24">
-          <h3 className="text-3xl font-semibold mb-12 font-bricolage-grotesque text-center">Tech Stacks</h3>
-          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-6 text-center text-xl">
-            <SiMongodb className="text-6xl text-green-600" title="MongoDB" />
-            <SiExpress className="text-6xl text-text-muted/80" title="Express.js" />
-            <FaNodeJs className="text-6xl text-green-500" title="Node.js" />
-            <FaReact className="text-6xl text-sky-400" title="React.js" />
-            <SiTailwindcss className="text-6xl text-cyan-400" title="Tailwind CSS" />
-            <SiFirebase className="text-6xl text-yellow-500" title="Firebase" />
-            <FaGithub className="text-6xl text-muted" title="GitHub" />
-            <SiJavascript className="text-6xl text-yellow-400" title="JavaScript" />
-            <SiHtml5 className="text-6xl text-orange-600" title="HTML5" />
-            <SiCss3 className="text-6xl text-blue-600" title="CSS3" />
-            <SiDaisyui className="text-6xl text-pink-500" title="DaisyUI" />
-            <SiHeadlessui className="text-6xl text-purple-500" title="Headless UI" />
+      {/* Stats Section */}
+      <section className="py-16 sm:py-20 lg:py-24 bg-white dark:bg-zinc-900">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {stats.map((stat, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="text-center"
+              >
+                <div className="text-4xl sm:text-5xl font-bold text-emerald-500 font-bricolage-grotesque mb-2">
+                  {stat.value}
+                </div>
+                <div className="text-lg text-text-muted">
+                  {stat.label}
+                </div>
+              </motion.div>
+            ))}
           </div>
         </div>
+      </section>
 
-        {/* Projects */}
-        {/* Projects */}
-        <div className="mt-24">
-          <h3 className="text-3xl font-semibold mb-12 font-bricolage-grotesque text-center">Featured Projects</h3>
-          <div className="grid gap-10 sm:grid-cols-2">
-            {projects.map((project, idx) => (
+      {/* Our Values */}
+      <section className="py-16 sm:py-20 lg:py-24 bg-zinc-50 dark:bg-zinc-800">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl sm:text-4xl font-bold font-bricolage-grotesque text-text mb-4">
+              Our Values
+            </h2>
+            <p className="text-lg text-text-muted max-w-2xl mx-auto">
+              The principles that guide everything we do
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {values.map((value, index) => (
               <motion.div
-                key={idx}
-                whileHover={{ scale: 1.015 }}
-                transition={{ type: "spring", stiffness: 120 }}
-                className="bg-background/90 rounded-2xl shadow-lg glass-card border-muted hover:shadow-xl overflow-hidden"
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="bg-white dark:bg-zinc-900 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow"
               >
-                <div className="w-full h-48 bg-muted">
+                <div className="w-12 h-12 bg-emerald-100 dark:bg-emerald-900/20 rounded-lg flex items-center justify-center mb-4">
+                  <span className="text-emerald-500">{value.icon}</span>
+                </div>
+                <h3 className="text-xl font-bold text-text mb-2 font-bricolage-grotesque">
+                  {value.title}
+                </h3>
+                <p className="text-text-muted">
+                  {value.description}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Our Team */}
+      <section className="py-16 sm:py-20 lg:py-24 bg-white dark:bg-zinc-900">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl sm:text-4xl font-bold font-bricolage-grotesque text-text mb-4">
+              Meet Our Team
+            </h2>
+            <p className="text-lg text-text-muted max-w-2xl mx-auto">
+              The passionate people behind your unforgettable journeys
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {teamMembers.map((member, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="bg-zinc-50 dark:bg-zinc-800 rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow"
+              >
+                <div className="aspect-square">
                   <img
-                    src={project.image}
-                    alt={project.title}
+                    src={member.image}
+                    alt={member.name}
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <div className="p-5 space-y-4">
-                  <h4 className="text-2xl font-bold text-brand">{project.title}</h4>
-                  <p className="text-sm text-muted">{project.description}</p>
-
-                  <div className="flex flex-wrap gap-2 text-sm">
-                    {project.tech.map((tech, i) => (
-                      <span
-                        key={i}
-                        className="bg-brand/10 text-brand border border-brand px-2 py-0.5 rounded-full"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-
-                  <div className="flex flex-wrap items-center gap-3 pt-3">
-                    {project.live && (
-                      <a
-                        href={project.live}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="btn btn-base bg-brand/40 text-white hover:bg-brand/80 rounded-full"
-                      >
-                        Live Site
-                      </a>
-                    )}
-                    {
-                      project.working && (
-                        <h1 className="bg-brand/20 text-white px-4 py-2 rounded-full font-bricolage-grotesque">Working on it</h1>
-                      )
-                    }
-
-                  </div>
+                <div className="p-5">
+                  <h3 className="text-xl font-bold text-text mb-1 font-bricolage-grotesque">
+                    {member.name}
+                  </h3>
+                  <p className="text-emerald-500 font-medium mb-3">
+                    {member.role}
+                  </p>
+                  <p className="text-sm text-text-muted">
+                    {member.bio}
+                  </p>
                 </div>
               </motion.div>
             ))}
           </div>
         </div>
+      </section>
 
-
-        {/* <div className="mt-12">
-          <h3 className="text-2xl font-semibold mb-4">Featured Projects</h3>
-          <div className="grid md:grid-cols-2 gap-6">
-            {projects.map((project, idx) => (
-              <motion.div
-                key={idx}
-                whileHover={{ scale: 1.03 }}
-                className="bg-background border border-muted rounded-2xl p-5 shadow hover:shadow-lg transition"
+      {/* CTA Section */}
+      <section className="py-16 sm:py-20 lg:py-24 bg-gradient-to-r from-emerald-500 to-teal-600">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl mx-auto text-center">
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              viewport={{ once: true }}
+              className="text-3xl sm:text-4xl font-bold text-white mb-6 font-bricolage-grotesque"
+            >
+              Ready to Begin Your Bangladesh Adventure?
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              viewport={{ once: true }}
+              className="text-lg text-emerald-50 mb-8"
+            >
+              Join thousands of travelers who have discovered the magic of Bangladesh with us. Your journey starts here.
+            </motion.p>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              viewport={{ once: true }}
+            >
+              <Link
+                to="/trips"
+                className="inline-flex items-center gap-2 bg-white text-emerald-600 font-bold px-6 py-3 rounded-full hover:bg-zinc-100 transition-colors"
               >
-                <h4 className="text-xl font-bold text-brand">{project.title}</h4>
-                <p className="mt-2 text-sm text-muted">Tech used: {project.tech.join(", ")}</p>
-                <a
-                  href={project.link}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-block mt-3 px-4 py-1 bg-brand text-white rounded-full hover:bg-brand/80 text-sm transition"
-                >
-                  Visit Project
-                </a>
-              </motion.div>
-            ))}
+                Explore Our Trips
+                <FiStar className="text-amber-500" />
+              </Link>
+            </motion.div>
           </div>
-        </div> */}
-      </div>
-    </>
+        </div>
+      </section>
+    </div>
   );
 };
 
