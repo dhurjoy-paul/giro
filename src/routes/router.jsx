@@ -18,6 +18,7 @@ import Statistics from '../pages/dashboard/admin/Statistics';
 import AddStory from '../pages/dashboard/common/AddStory';
 import EditStory from '../pages/dashboard/common/EditStory';
 import ManageStory from '../pages/dashboard/common/ManageStory';
+import OverviewPage from '../pages/dashboard/common/Profile/OverviewPage';
 import Profile from '../pages/dashboard/common/Profile/Profile';
 import AssignedTour from '../pages/dashboard/tourGuide/AssignedTour';
 import ApplyGuide from '../pages/dashboard/tourist/ApplyGuide';
@@ -56,6 +57,7 @@ const router = createBrowserRouter([
     element: <DashboardLayout />,
     children: [
       { index: true, element: <PrivateRoute><Profile /></PrivateRoute> },
+      { index: 'overview', element: <PrivateRoute><OverviewPage /></PrivateRoute> },
 
       // for tourist and Guide
       { path: 'add-story', element: <CommonRoute><AddStory /></CommonRoute> },
