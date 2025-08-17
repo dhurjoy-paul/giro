@@ -4,6 +4,8 @@ import CulturalSnapshots from "./CulturalSnapshots"
 import OverviewSection from "./OverviewSection"
 import TourismSection from "./TourismSection"
 import TouristStories from "./TouristStories"
+import TravelStats from "./TravelStats"
+import TravelTips from "./TravelTips"
 
 const Home = () => {
   return (
@@ -11,7 +13,9 @@ const Home = () => {
       <CarouselSection />
       <OverviewSection />
       <TourismSection />
+      <TravelStats />
       <TouristStories />
+      <TravelTips />
       <CulturalSnapshots />
       <NewsletterSection />
     </>
