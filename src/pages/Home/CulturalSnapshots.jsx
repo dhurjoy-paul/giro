@@ -62,7 +62,7 @@ const CulturalSnapshots = () => {
   return (
     <section
       id="cultural-snapshots"
-      className="w-full bg-transparent py-24 md:py-28 px-4 md:px-10 lg:px-20"
+      className="w-full bg-transparent py-24 md:py-28"
     >
       {/* Section Heading */}
       <div className="text-center mb-10">
