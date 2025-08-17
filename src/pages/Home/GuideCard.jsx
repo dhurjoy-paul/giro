@@ -1,47 +1,35 @@
 import { motion } from 'framer-motion';
-import { FaUserTie } from 'react-icons/fa';
-import { MdEmail } from "react-icons/md";
 import { useNavigate } from 'react-router';
 
 const GuideCard = ({ guide }) => {
   const navigate = useNavigate();
-
   return (
-    <motion.button
-      whileHover={{ scale: 1.015 }}
-      whileTap={{ scale: 0.97 }}
+    <motion.div
+      whileTap={{ scale: 0.98 }}
+      className="relative aspect-square w-full overflow-hidden rounded-xl group shadow-md hover:shadow-2xl transition-all duration-300 cursor-pointer"
       onClick={() => navigate(`/tour-guide/${guide.email}`)}
-      className="rounded-3xl overflow-hidden bg-gradient-to-br from-white/80 to-gray-100 dark:from-bg-dark/40 dark:to-bg-dark/30 shadow-lg hover:shadow-xl transition duration-300"
     >
-      {/* Top image */}
-      <div className="relative">
-        <img
-          src={guide.image}
-          alt={guide.name}
-          className="h-48 sm:h-52 md:h-56 w-full rounded-3xl object-cover"
-        />
-      </div>
+      <img
+        src={guide.image}
+        alt={guide.name}
+        className="w-full h-full object-cover"
+      />
 
-      <div className="p-4 space-y-3">
-        <p className="text-sm sm:text-base text-text-muted font-medium flex items-center gap-4">
-          <span className="group-hover:text-emerald-500 transition-colors duration-300">
-            <FaUserTie size={24} />
-          </span>
-          <h3 className="text-lg sm:text-xl md:text-2xl font-semibold text-text truncate font-bricolage-grotesque">
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-90"></div>
+
+      <div className="absolute inset-0 flex flex-col justify-end p-3">
+        <div className="space-y-1">
+          <h3 className="text-base font-bold text-white truncate font-bricolage-grotesque group-hover:text-brand transition-all duration-300">
             {guide.name}
           </h3>
-        </p>
-
-        <p className="text-sm sm:text-base md:text-lg text-text-muted flex items-center gap-5">
-          <span className="group-hover:text-emerald-500 transition-colors duration-300">
-            <MdEmail size={20} />
-          </span>
-          <h3 className="text-text truncate">
+          <p className="text-sm text-white/80 truncate">
             {guide.email}
-          </h3>
-        </p>
+          </p>
+        </div>
       </div>
-    </motion.button>
+
+      <div className="absolute inset-0 bg-white/10 opacity-0 hover:opacity-100 transition-all duration-300"></div>
+    </motion.div>
   );
 };
 

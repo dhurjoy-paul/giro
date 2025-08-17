@@ -32,7 +32,7 @@ const StoryCard = ({ story }) => {
 
   return (
     <>
-      <div className="bg-transparent rounded-2xl shadow-md p-4 hover:shadow-2xl flex flex-col justify-between group transition-all duration-300">
+      <div className="bg-transparent rounded-2xl p-4 flex flex-col justify-between group shadow-md hover:shadow-2xl transition-all duration-300">
         <img
           src={story.images?.[0]}
           alt={story.title}
