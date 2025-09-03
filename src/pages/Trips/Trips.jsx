@@ -9,18 +9,17 @@ const Trips = () => {
   const axiosSecure = useAxiosSecure();
   const { user, loading } = useAuth();
   const email = user?.email;
-  
+
   // State for sorting
   const [sortField, setSortField] = useState('createdAt'); // 'createdAt' or 'price'
   const [sortOrder, setSortOrder] = useState('desc'); // 'asc' or 'desc'
-  
+
   const { data: packages = [], isLoading, refetch } = useQuery({
     queryKey: ["packages", email, sortField, sortOrder],
     queryFn: async () => {
       const res = await axiosSecure.get(`/packages?field=${sortField}&order=${sortOrder}`);
       return res.data;
-    },
-    enabled: !!email,
+    }
   });
 
   const handleFieldChange = (e) => {
@@ -46,13 +45,13 @@ const Trips = () => {
           <h3 className="font-bricolage-grotesque text-3xl font-semibold text-center md:text-left mb-4 md:mb-0">
             All trips are planned for you ({packages?.length})
           </h3>
-          
+
           <div className="flex flex-col sm:flex-row gap-4">
             {/* Sort By Dropdown */}
             <div className="flex items-center space-x-2">
               <span className="text-text-muted font-medium whitespace-nowrap">Sort by:</span>
-              <select 
-                value={sortField} 
+              <select
+                value={sortField}
                 onChange={handleFieldChange}
                 className="bg-bg-light dark:bg-gray-800 border border-border dark:border-gray-700 rounded-lg px-4 py-2 text-text focus:outline-none focus:ring-2 focus:ring-brand/50"
               >
@@ -60,17 +59,16 @@ const Trips = () => {
                 <option value="price">Price</option>
               </select>
             </div>
-            
+
             {/* Order Dropdown */}
             <div className="flex items-center space-x-2">
               <span className="text-text-muted font-medium whitespace-nowrap">Order:</span>
-              <select 
-                value={sortOrder} 
+              <select
+                value={sortOrder}
                 onChange={handleOrderChange}
                 disabled={sortField === 'createdAt'}
-                className={`bg-bg-light dark:bg-gray-800 border border-border dark:border-gray-700 rounded-lg px-4 py-2 text-text focus:outline-none focus:ring-2 focus:ring-brand/50 ${
-                  sortField === 'createdAt' ? 'opacity-50 cursor-not-allowed' : ''
-                }`}
+                className={`bg-bg-light dark:bg-gray-800 border border-border dark:border-gray-700 rounded-lg px-4 py-2 text-text focus:outline-none focus:ring-2 focus:ring-brand/50 ${sortField === 'createdAt' ? 'opacity-50 cursor-not-allowed' : ''
+                  }`}
               >
                 <option value="asc">Ascending</option>
                 <option value="desc">Descending</option>
@@ -78,14 +76,14 @@ const Trips = () => {
             </div>
           </div>
         </div>
-        
+
         {/* Packages Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {packages.map((trip) => (
             <TripCard key={trip._id} trip={trip} />
           ))}
         </div>
-        
+
         {/* Empty State */}
         {packages.length === 0 && (
           <div className="text-center py-12">
